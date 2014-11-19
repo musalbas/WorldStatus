@@ -21,5 +21,4 @@ gradlew.bat
 .idea/
 *.properties
 *.iml
-app/build/
 
