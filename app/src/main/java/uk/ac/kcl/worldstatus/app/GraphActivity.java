@@ -1,23 +1,31 @@
 package uk.ac.kcl.worldstatus.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.LinearLayout;
+import org.achartengine.GraphicalView;
 
-import java.io.Serializable;
-
-
-public class MainActivity extends ActionBarActivity implements Serializable {
-
+/**
+ * Created by Kristin on 22-11-14.
+ */
+public class GraphActivity extends Activity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+        setContentView(R.layout.activity_graph);
 
+        Intent intent = getIntent();
+        String graphType = intent.getStringExtra("graphType");
+        //depending on graphType draw the graph. Draws a Line Graph by default atm.
+
+        LineGraph line = new LineGraph();
+        GraphicalView lineView = line.getView(this);
+        LinearLayout linLayout = (LinearLayout) findViewById(R.id.chart);
+        linLayout.addView(lineView);
+    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -40,16 +48,7 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
     public android.support.v4.app.FragmentManager getSupportFragmentManager() {
         return null;
     }
-
-    public void graphHandler(View v) {
-
-        Intent intent = new Intent(MainActivity.this, GraphActivity.class);
-        intent.putExtra("graphType", "line"); // tell GraphActivity what kind of graph to draw
-        startActivity(intent);
-    }
 }
-

@@ -23,6 +23,7 @@
         </activity>
 
         <activity android:name="org.achartengine.GraphicalActivity"/>
+        <activity android:name=".GraphActivity"/>
     </application>
 
 </manifest>
