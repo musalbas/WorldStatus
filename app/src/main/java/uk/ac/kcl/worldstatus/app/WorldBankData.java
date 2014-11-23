@@ -1,13 +1,11 @@
 package uk.ac.kcl.worldstatus.app;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -36,7 +34,7 @@ public class WorldBankData {
             jsonString += buffer;
         }
 
-        JSONObject jsonObject = new JSONObject(jsonString);
+        //JSONObject jsonObject = new JSONObject(jsonString);
 
         System.out.println(jsonString);
 
