@@ -1,12 +1,16 @@
 package uk.ac.kcl.worldstatus.app;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.io.Serializable;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements Serializable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,4 +44,12 @@ public class MainActivity extends ActionBarActivity {
     public android.support.v4.app.FragmentManager getSupportFragmentManager() {
         return null;
     }
+
+    public void graphHandler(View v) {
+
+        Intent intent = new Intent(MainActivity.this, GraphActivity.class);
+        intent.putExtra("graphType", "line"); // tell GraphActivity what kind of graph to draw
+        startActivity(intent);
+    }
 }
+
