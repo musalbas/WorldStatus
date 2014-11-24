@@ -6,8 +6,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import java.io.Serializable;
+
+import com.example.projectpart1.R;
 
 
 public class MainActivity extends ActionBarActivity implements Serializable {
@@ -16,6 +20,21 @@ public class MainActivity extends ActionBarActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+     // Get a reference to the AutoCompleteTextView in the layout
+     		AutoCompleteTextView textViewCountry = (AutoCompleteTextView) findViewById(R.id.textViewCountry);
+     		AutoCompleteTextView textViewCondition = (AutoCompleteTextView) findViewById(R.id.textViewCondition);
+     		// Get the string array
+     		String[] countries = getResources().getStringArray(R.array.countryList);
+     		String[] conditions = getResources().getStringArray(R.array.conditionList);
+     		// Create the adapter and set it to the AutoCompleteTextView 
+     		ArrayAdapter<String> adapterCountry = 
+     				new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
+     		ArrayAdapter<String> adaptCondition=
+     				new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, conditions);
+     		
+     		textViewCountry.setAdapter(adapterCountry);
+     		textViewCondition.setAdapter(adaptCondition);
     }
 
 

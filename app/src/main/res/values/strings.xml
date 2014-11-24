@@ -2,7 +2,18 @@
 <resources>
 
     <string name="app_name">WorldStatus</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="welcomeMessage">Welcome to the Condition Tracker!</string>
+    <string name="submitMessage">Generate Graph</string>
+    
+    <string-array name="countryList">
+        <item>Arctic</item>
+        <item>Antartica</item>
+    </string-array>
+    
+    <string-array name="conditionList">
+        <item>Frostbite</item>
+        
+    </string-array>
 
 </resources>
