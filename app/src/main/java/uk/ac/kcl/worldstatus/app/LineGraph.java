@@ -3,9 +3,13 @@ package uk.ac.kcl.worldstatus.app;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
+import org.achartengine.model.SeriesSelection;
 import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
@@ -19,13 +23,22 @@ public class LineGraph {
         int x[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int y[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
 
+        int a[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int b[] = {100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
+
+        int c[] = {99, 88, 77, 66, 55, 44, 33, 22, 11, 10};
+        int d[] = {13, 78, 14, 56, 99, 23, 100, 44, 3, 16};
+
         TimeSeries series = new TimeSeries("HIV infections.");
         TimeSeries series1 = new TimeSeries("Ebola infection.");
         TimeSeries series2 = new TimeSeries("AIDS infections.");
         TimeSeries series3 = new TimeSeries("Breast Cancer.");
 
-        for (int i=0; i<x.length; i++) {
-            series.add(x[i], y[i]);
+        for (int i = 0; i < x.length; i++) {
+            series.add(b[i], c[i]);
+            series1.add(a[i], b[i]);
+            series2.add(c[i], d[i]);
+            series3.add(a[i], d[i]);
         }
 
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
@@ -49,20 +62,68 @@ public class LineGraph {
         mRenderer.setApplyBackgroundColor(true);
         mRenderer.setBackgroundColor(Color.DKGRAY);
         mRenderer.setPanEnabled(false, true);
-        mRenderer.setZoomRate(0.2f);
+        mRenderer.setZoomRate(10.2f);
         mRenderer.setZoomEnabled(true, true);
         mRenderer.setPanLimits(new double[]{0, 12, 0, 100});
         mRenderer.setZoomLimits(new double[]{0, 12, 0, 100});
-
-        XYSeriesRenderer renderer = new XYSeriesRenderer();
-        renderer.setColor(Color.GREEN);
-        renderer.setPointStyle(PointStyle.CIRCLE);
-        renderer.setFillPoints(true);
-
-        mRenderer.addSeriesRenderer(renderer);
         mRenderer.setAxesColor(Color.DKGRAY);
         mRenderer.setLabelsColor(Color.LTGRAY);
+        mRenderer.setClickEnabled(true);
+        mRenderer.setSelectableBuffer(10);
 
-        return ChartFactory.getLineChartView(context, dataset, mRenderer);
+        XYSeriesRenderer renderer = new XYSeriesRenderer();
+        renderer.setColor(Color.RED);
+        renderer.setPointStyle(PointStyle.CIRCLE);
+        renderer.setFillPoints(true);
+        mRenderer.addSeriesRenderer(renderer);
+        renderer = new XYSeriesRenderer();
+        renderer.setColor(Color.BLUE);
+        renderer.setPointStyle(PointStyle.SQUARE);
+        renderer.setFillPoints(true);
+        mRenderer.addSeriesRenderer(renderer);
+        renderer = new XYSeriesRenderer();
+        renderer.setColor(Color.YELLOW);
+        renderer.setPointStyle(PointStyle.DIAMOND);
+        renderer.setFillPoints(true);
+        mRenderer.addSeriesRenderer(renderer);
+        renderer = new XYSeriesRenderer();
+        renderer.setColor(Color.GREEN);
+        renderer.setPointStyle(PointStyle.TRIANGLE);
+        renderer.setFillPoints(true);
+        mRenderer.addSeriesRenderer(renderer);
+
+        final GraphicalView graphView = ChartFactory.getLineChartView(context, dataset, mRenderer);
+        graphView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                SeriesSelection seriesSelection = graphView.getCurrentSeriesAndPoint();
+                Log.w("TOUCH", String.valueOf(seriesSelection));
+                if (seriesSelection != null) {
+                    int x = seriesSelection.getPointIndex();
+                    Log.w("TEST", String.valueOf(x));
+                }
+                return true;
+            }
+        });
+
+        /*graphView.addZoomListener(new ZoomListener() {
+            @Override
+            public void zoomReset() {
+
+            }
+
+            public void zoomApplied(ZoomEvent e) {
+                if (e.isZoomIn()) {
+                    Log.w("TAG", "IN");
+                } else {
+                    Log.d("TAG2", "OUT");
+                }
+
+            }
+        }, true, true);
+        */
+
+        return graphView;
     }
 }
