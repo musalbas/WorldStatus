@@ -17,13 +17,14 @@ import java.util.ArrayList;
 public class WorldBankData {
 
     /**
-     * @param country   The country
-     * @param indicator The name of a development indicator
+     * Gets indicator data about a country.
+     *
+     * @param country   The country.
+     * @param indicator The name of a development indicator.
      * @return An ArrayList of [x, y] data points.
      */
     public static ArrayList<Float[]> getIndicatorData(String country, String indicator, int fromYear, int toYear) throws IOException, JSONException, ParserConfigurationException, SAXException {
-        String XMLString = Utils.getDataFromURL("http://api.worldbank.org/countries/" + country + "/indicators/"
-                + indicator + "?per_page=100&date=" + fromYear + ":" + toYear + "&format=xml");
+        String XMLString = Utils.getDataFromURL("http://api.worldbank.org/countries/" + country + "/indicators/" + indicator + "?per_page=100&date=" + fromYear + ":" + toYear + "&format=xml");
         XMLString = XMLString.substring(3);
         Document document = Utils.getDocumentFromString(XMLString);
 

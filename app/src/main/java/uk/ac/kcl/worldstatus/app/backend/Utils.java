@@ -8,7 +8,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -16,6 +15,12 @@ import java.net.URL;
  */
 public class Utils {
 
+    /**
+     * Gets data from an URL.
+     *
+     * @param URL The URL.
+     * @return The data.
+     */
     public static String getDataFromURL(String URL) throws IOException {
         java.net.URL url = new URL(URL);
         InputStream inputStream = url.openStream();
@@ -30,6 +35,12 @@ public class Utils {
         return data;
     }
 
+    /**
+     * Converts an XML string to a Document.
+     *
+     * @param string The XML string.
+     * @return The Document.
+     */
     public static Document getDocumentFromString(String string) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
