@@ -14,9 +14,6 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
-import com.example.tester.HappyFamily;
-import com.example.tester.R;
-
 public class MainActivity extends ActionBarActivity implements Serializable {
 
     @Override
