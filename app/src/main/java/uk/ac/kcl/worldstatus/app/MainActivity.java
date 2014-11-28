@@ -8,8 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.io.Serializable;
+
+import com.example.tester.HappyFamily;
+import com.example.tester.R;
 
 public class MainActivity extends ActionBarActivity implements Serializable {
 
@@ -18,20 +24,11 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get a reference to the AutoCompleteTextView in the layout
-        AutoCompleteTextView textViewCountry = (AutoCompleteTextView) findViewById(R.id.textViewCountry);
-        AutoCompleteTextView textViewCondition = (AutoCompleteTextView) findViewById(R.id.textViewCondition);
-        // Get the string array
-        String[] countries = getResources().getStringArray(R.array.countryList);
-        String[] conditions = getResources().getStringArray(R.array.conditionList);
-        // Create the adapter and set it to the AutoCompleteTextView
-        ArrayAdapter<String> adapterCountry =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
-        ArrayAdapter<String> adaptCondition =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, conditions);
-
-        textViewCountry.setAdapter(adapterCountry);
-        textViewCondition.setAdapter(adaptCondition);
+        Pairer test1 = new Pairer((SeekBar) findViewById(R.id.seekbar1), (TextView) findViewById(R.id.tv11), (Spinner) findViewById(R.id.sp11));
+		Pairer test2 = new Pairer((SeekBar) findViewById(R.id.seekbar2), (TextView) findViewById(R.id.tv21), (Spinner) findViewById(R.id.sp21));
+		Pairer test3 = new Pairer((SeekBar) findViewById(R.id.seekbar3), (TextView) findViewById(R.id.tv31), (Spinner) findViewById(R.id.sp31));
+		Pairer test4 = new Pairer((SeekBar) findViewById(R.id.seekbar4), (TextView) findViewById(R.id.tv41), (Spinner) findViewById(R.id.sp41));
+		Pairer test5 = new Pairer((SeekBar) findViewById(R.id.seekbar5), (TextView) findViewById(R.id.tv51), (Spinner) findViewById(R.id.sp51));
     }
 
 

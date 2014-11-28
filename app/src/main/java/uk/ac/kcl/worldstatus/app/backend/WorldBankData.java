@@ -90,15 +90,15 @@ public class WorldBankData {
     }
 
     // TODO remove this main method
-    public static void main(String[] args) throws IOException, JSONException, ParserConfigurationException, SAXException {
-        ArrayList<Float[]> tempFloats = getIndicatorDataByCountry("USA", "AG.LND.ARBL.ZS", 1960, 2014);
-
-        for (int a = 0; a < tempFloats.size(); ++a) {
-            System.out.println(tempFloats.get(a)[0]);
-            System.out.println(tempFloats.get(a)[1]);
-        }
-
-        System.out.println(tempFloats.size());
+//    public static void main(String[] args) throws IOException, JSONException, ParserConfigurationException, SAXException {
+//        ArrayList<Float[]> tempFloats = getIndicatorDataByCountry("USA", "AG.LND.ARBL.ZS", 1960, 2014);
+//
+//        for (int a = 0; a < tempFloats.size(); ++a) {
+//            System.out.println(tempFloats.get(a)[0]);
+//            System.out.println(tempFloats.get(a)[1]);
+//        }
+//
+//        System.out.println(tempFloats.size());
         // System.out.println(getIndicatorData("USA", "AG.LND.ARBL.ZS", 1960, 2014).get(0)[0]);
     }
 

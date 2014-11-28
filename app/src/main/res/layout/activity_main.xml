@@ -1,52 +1,187 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" style="@style/AppTheme">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:id="@+id/welcome"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
-        android:text="@string/welcomeMessage" />
+        android:text="Welcome to the Country Finder" />
 
-    <AutoCompleteTextView
-        android:id="@+id/textViewCountry"
+    <LinearLayout
+        android:id="@+id/linearL11"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="63dp"
-        android:ems="10" 
-        android:hint="Enter country">
-        <requestFocus />
-    </AutoCompleteTextView>
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:padding="5dp" >
 
-    <AutoCompleteTextView
-        android:id="@+id/textViewCondition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewCountry"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:hint="Enter a condition" />
+        <TextView
+            android:id="@+id/tv11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:text="Low" />
+
+        <SeekBar
+            android:id="@+id/seekbar1"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:max="2" />
+
+        <Spinner
+            android:id="@+id/sp11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.47"
+            android:entries="@array/options"
+            android:paddingLeft="5dp"
+            android:prompt="@string/optionPrompt" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearL21"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/tv21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Low" />
+
+        <SeekBar
+            android:id="@+id/seekbar2"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:max="2" />
+
+        <Spinner
+            android:id="@+id/sp21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.47"
+            android:entries="@array/options"
+            android:paddingLeft="5dp"
+            android:prompt="@string/optionPrompt" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearL31"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/tv31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Low" />
+
+        <SeekBar
+            android:id="@+id/seekbar3"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/seekbar2"
+            android:layout_alignRight="@+id/seekbar1"
+            android:layout_centerVertical="true"
+            android:max="2" />
+
+        <Spinner
+            android:id="@+id/sp31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.47"
+            android:entries="@array/options"
+            android:paddingLeft="5dp"
+            android:prompt="@string/optionPrompt" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearL41"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/tv41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Low" />
+
+        <SeekBar
+            android:id="@+id/seekbar4"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv41"
+            android:layout_below="@+id/tv41"
+            android:layout_toLeftOf="@+id/tv12"
+            android:max="2" />
+
+        <Spinner
+            android:id="@+id/sp41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.47"
+            android:entries="@array/options"
+            android:paddingLeft="5dp"
+            android:prompt="@string/optionPrompt" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearL51"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/tv51"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Low" />
+
+        <SeekBar
+            android:id="@+id/seekbar5"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:max="2" />
+
+        <Spinner
+            android:id="@+id/sp51"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.47"
+            android:entries="@array/options"
+            android:paddingLeft="5dp"
+            android:prompt="@string/optionPrompt" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/ll6"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
 
     <Button
         android:id="@+id/lineGraphBtn"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewCondition"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textViewCondition"
-        android:layout_marginBottom="66dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:onClick="graphHandler"
         android:text="@string/submitMessage" />
+        
+    </LinearLayout>
 
-</RelativeLayout>
+
+</LinearLayout>

@@ -3,16 +3,20 @@
 
     <string name="app_name">WorldStatus</string>
     <string name="action_settings">Settings</string>
-    <string name="welcomeMessage">Welcome to the Condition Tracker!</string>
-    <string name="submitMessage">Generate Graph</string>
+    <string name="welcomeMessage">Find out where you should go!</string>
+    <string name="submitMessage">Go!</string>
+	<string name="optionPrompt">Select an option</string> 
     
-    <string-array name="countryList">
-        <item>Arctic</item>
-        <item>Antartica</item>
-    </string-array>
+    <string-array name="options">
     
-    <string-array name="conditionList">
-        <item>Frostbite</item>
+        <item> 1.nemployment</item>
+        <item> 2.Urban population</item>
+        <item> 3.Tax rate</item>
+        <item> 4.Forest area</item>
+        <item> 5.Inflation</item>
+        <item> 6.Secondary school enrolment</item>
+        <item> 7.Fossil fuel consumption</item>
+        <item> 8.Expense (of GDP)</item>
         
     </string-array>
 
