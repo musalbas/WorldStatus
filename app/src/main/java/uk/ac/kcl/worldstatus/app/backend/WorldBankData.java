@@ -56,8 +56,9 @@ public class WorldBankData {
 
     /**
      * Gets indicator data about all countries for a specific year.
+     *
      * @param indicator The name of the development indicator.
-     * @param year The year.
+     * @param year      The year.
      * @return A country, value hashmap.
      */
     public static HashMap<String, Float> getIndicatorDataByYear(String indicator, int year) throws IOException, SAXException, ParserConfigurationException {
@@ -87,19 +88,6 @@ public class WorldBankData {
         }
 
         return data;
-    }
-
-    // TODO remove this main method
-//    public static void main(String[] args) throws IOException, JSONException, ParserConfigurationException, SAXException {
-//        ArrayList<Float[]> tempFloats = getIndicatorDataByCountry("USA", "AG.LND.ARBL.ZS", 1960, 2014);
-//
-//        for (int a = 0; a < tempFloats.size(); ++a) {
-//            System.out.println(tempFloats.get(a)[0]);
-//            System.out.println(tempFloats.get(a)[1]);
-//        }
-//
-//        System.out.println(tempFloats.size());
-        // System.out.println(getIndicatorData("USA", "AG.LND.ARBL.ZS", 1960, 2014).get(0)[0]);
     }
 
 }
