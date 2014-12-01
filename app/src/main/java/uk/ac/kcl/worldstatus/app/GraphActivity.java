@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import org.achartengine.GraphicalView;
 
 /**
@@ -23,8 +23,8 @@ public class GraphActivity extends Activity {
 
         LineGraph line = new LineGraph();
         GraphicalView lineView = line.getView(this);
-        LinearLayout linLayout = (LinearLayout) findViewById(R.id.chart);
-        linLayout.addView(lineView);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.chart);
+        frameLayout.addView(lineView);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
