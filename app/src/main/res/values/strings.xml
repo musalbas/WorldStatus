@@ -9,7 +9,7 @@
     
     <string-array name="options">
     
-        <item> 1.nemployment</item>
+        <item> 1.Unemployment</item>
         <item> 2.Urban population</item>
         <item> 3.Tax rate</item>
         <item> 4.Forest area</item>

@@ -62,4 +62,3 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         startActivity(intent);
     }
 }
-

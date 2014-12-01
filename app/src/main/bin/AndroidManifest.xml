@@ -23,7 +23,9 @@
         </activity>
 
         <activity android:name="org.achartengine.GraphicalActivity"/>
-        <activity android:name=".GraphActivity"/>
+        <activity android:name=".GraphActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

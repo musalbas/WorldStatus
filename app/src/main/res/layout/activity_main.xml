@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
+    android:weightSum="11"
     android:padding="5dp" >
 
     <TextView
@@ -13,6 +14,7 @@
 
     <LinearLayout
         android:id="@+id/linearL11"
+        android:layout_weight="2"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -44,6 +46,7 @@
     <LinearLayout
         android:id="@+id/linearL21"
         android:layout_width="fill_parent"
+        android:layout_weight="2"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:padding="10dp" >
@@ -74,6 +77,7 @@
     <LinearLayout
         android:id="@+id/linearL31"
         android:layout_width="fill_parent"
+        android:layout_weight="2"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:padding="10dp" >
@@ -107,6 +111,7 @@
     <LinearLayout
         android:id="@+id/linearL41"
         android:layout_width="fill_parent"
+        android:layout_weight="2"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:padding="10dp" >
@@ -140,6 +145,7 @@
     <LinearLayout
         android:id="@+id/linearL51"
         android:layout_width="fill_parent"
+        android:layout_weight="2"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:padding="10dp" >
@@ -171,6 +177,7 @@
         android:id="@+id/ll6"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
+        android:layout_weight="1"
         android:orientation="horizontal" >
 
     <Button
