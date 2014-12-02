@@ -1,5 +1,6 @@
 package uk.ac.kcl.worldstatus.app;
 
+import android.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -21,11 +23,15 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Pairer test1 = new Pairer((SeekBar) findViewById(R.id.seekbar1), (TextView) findViewById(R.id.tv11), (Spinner) findViewById(R.id.sp11));
-		Pairer test2 = new Pairer((SeekBar) findViewById(R.id.seekbar2), (TextView) findViewById(R.id.tv21), (Spinner) findViewById(R.id.sp21));
-		Pairer test3 = new Pairer((SeekBar) findViewById(R.id.seekbar3), (TextView) findViewById(R.id.tv31), (Spinner) findViewById(R.id.sp31));
-		Pairer test4 = new Pairer((SeekBar) findViewById(R.id.seekbar4), (TextView) findViewById(R.id.tv41), (Spinner) findViewById(R.id.sp41));
-		Pairer test5 = new Pairer((SeekBar) findViewById(R.id.seekbar5), (TextView) findViewById(R.id.tv51), (Spinner) findViewById(R.id.sp51));
+        Pairer test1 = new Pairer((SeekBar) findViewById(R.id.seekbar1), (TextView) findViewById(R.id.tv11), (Spinner) findViewById(R.id.sp11), (Button) findViewById(R.id.button1));
+		Pairer test2 = new Pairer((SeekBar) findViewById(R.id.seekbar2), (TextView) findViewById(R.id.tv21), (Spinner) findViewById(R.id.sp21), (Button) findViewById(R.id.button2);
+		Pairer test3 = new Pairer((SeekBar) findViewById(R.id.seekbar3), (TextView) findViewById(R.id.tv31), (Spinner) findViewById(R.id.sp31), (Button) findViewById(R.id.button3);
+		Pairer test4 = new Pairer((SeekBar) findViewById(R.id.seekbar4), (TextView) findViewById(R.id.tv41), (Spinner) findViewById(R.id.sp41), (Button) findViewById(R.id.button4);
+		Pairer test5 = new Pairer((SeekBar) findViewById(R.id.seekbar5), (TextView) findViewById(R.id.tv51), (Spinner) findViewById(R.id.sp51), (Button) findViewById(R.id.button5);
+		
+		test1.setGray();
+		test3.setGray();
+		test5.setGray();
     }
 
 
