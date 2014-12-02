@@ -3,13 +3,9 @@ package uk.ac.kcl.worldstatus.app;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
-import org.achartengine.model.SeriesSelection;
 import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
@@ -93,36 +89,6 @@ public class LineGraph {
         mRenderer.addSeriesRenderer(renderer);
 
         final GraphicalView graphView = ChartFactory.getLineChartView(context, dataset, mRenderer);
-        graphView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                SeriesSelection seriesSelection = graphView.getCurrentSeriesAndPoint();
-                Log.w("TOUCH", String.valueOf(seriesSelection));
-                if (seriesSelection != null) {
-                    int x = seriesSelection.getPointIndex();
-                    Log.w("TEST", String.valueOf(x));
-                }
-                return true;
-            }
-        });
-
-        /*graphView.addZoomListener(new ZoomListener() {
-            @Override
-            public void zoomReset() {
-
-            }
-
-            public void zoomApplied(ZoomEvent e) {
-                if (e.isZoomIn()) {
-                    Log.w("TAG", "IN");
-                } else {
-                    Log.d("TAG2", "OUT");
-                }
-
-            }
-        }, true, true);
-        */
 
         return graphView;
     }

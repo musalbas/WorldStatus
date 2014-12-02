@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:weightSum="10">
 
-    <LinearLayout
+    <FrameLayout
+            android:id="@+id/spinners"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="8">
+        <Spinner
+                android:layout_width="220dp"
+                android:layout_height="46dp"
+                android:id="@+id/spinner2"
+                android:entries="@array/start_year"
+                android:prompt="@string/year_prompt"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="42dp"/>
+        <Spinner
+                android:layout_width="220dp"
+                android:layout_height="46dp"
+                android:id="@+id/spinner4"
+                android:entries="@array/end_year"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="42dp"/>
+    </FrameLayout>
+
+    <FrameLayout
             android:id="@+id/chart"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="300dp"
-            android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+    </FrameLayout>
 
-</RelativeLayout>
+</LinearLayout>
