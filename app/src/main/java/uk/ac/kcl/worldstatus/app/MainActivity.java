@@ -1,18 +1,12 @@
 package uk.ac.kcl.worldstatus.app;
 
-import android.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.SeekBar;
-import android.widget.Spinner;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.io.Serializable;
 
@@ -23,15 +17,15 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Pairer test1 = new Pairer((SeekBar) findViewById(R.id.seekbar1), (TextView) findViewById(R.id.tv11), (Spinner) findViewById(R.id.sp11), (Button) findViewById(R.id.button1));
-		Pairer test2 = new Pairer((SeekBar) findViewById(R.id.seekbar2), (TextView) findViewById(R.id.tv21), (Spinner) findViewById(R.id.sp21), (Button) findViewById(R.id.button2);
-		Pairer test3 = new Pairer((SeekBar) findViewById(R.id.seekbar3), (TextView) findViewById(R.id.tv31), (Spinner) findViewById(R.id.sp31), (Button) findViewById(R.id.button3);
-		Pairer test4 = new Pairer((SeekBar) findViewById(R.id.seekbar4), (TextView) findViewById(R.id.tv41), (Spinner) findViewById(R.id.sp41), (Button) findViewById(R.id.button4);
-		Pairer test5 = new Pairer((SeekBar) findViewById(R.id.seekbar5), (TextView) findViewById(R.id.tv51), (Spinner) findViewById(R.id.sp51), (Button) findViewById(R.id.button5);
-		
-		test1.setGray();
-		test3.setGray();
-		test5.setGray();
+        Pairer test1 = new Pairer((SeekBar) findViewById(R.id.sb1), (TextView) findViewById(R.id.tv1), (Spinner) findViewById(R.id.sp1), (LinearLayout) findViewById(R.id.ll1), (Button) findViewById(R.id.button1));
+        Pairer test2 = new Pairer((SeekBar) findViewById(R.id.sb2), (TextView) findViewById(R.id.tv2), (Spinner) findViewById(R.id.sp2), (LinearLayout) findViewById(R.id.ll2), (Button) findViewById(R.id.button2));
+        Pairer test3 = new Pairer((SeekBar) findViewById(R.id.sb3), (TextView) findViewById(R.id.tv3), (Spinner) findViewById(R.id.sp3), (LinearLayout) findViewById(R.id.ll3), (Button) findViewById(R.id.button3));
+        Pairer test4 = new Pairer((SeekBar) findViewById(R.id.sb4), (TextView) findViewById(R.id.tv4), (Spinner) findViewById(R.id.sp4), (LinearLayout) findViewById(R.id.ll4), (Button) findViewById(R.id.button4));
+        Pairer test5 = new Pairer((SeekBar) findViewById(R.id.sb5), (TextView) findViewById(R.id.tv5), (Spinner) findViewById(R.id.sp5), (LinearLayout) findViewById(R.id.ll5), (Button) findViewById(R.id.button5));
+
+        test1.setGray();
+        test3.setGray();
+        test5.setGray();
     }
 
 
@@ -62,7 +56,6 @@ public class MainActivity extends ActionBarActivity implements Serializable {
     }
 
     public void graphHandler(View v) {
-
         Intent intent = new Intent(MainActivity.this, GraphActivity.class);
         intent.putExtra("graphType", "line"); // tell GraphActivity what kind of graph to draw
         startActivity(intent);
