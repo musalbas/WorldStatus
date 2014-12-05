@@ -10,12 +10,122 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * An API for the World Bank data sets.
  */
 public class WorldBankData {
+
+    // Method that takes 5 key value pairs of country and importance.
+    // Then spits out the top scoring country
+
+
+    // 1 = we want places with a low %
+    // 2 = we want place with the avg %
+    // 3 = we want places with a high %
+    public static ArrayList<CountryValue> MasterScoreKeeper = new ArrayList<CountryValue>();
+
+    public WorldBankData() {
+
+    }
+
+    public static void main(String[] args) {
+        // use 2012
+        // SL.UEM.TOTL.ZS - Unemployment
+        // SP.URB.TOTL.ZS - Urban population
+        // IC.TAX.TOTL.CP.ZS - Tax Rate
+        // AG.LND.FRST.ZS - Forest Area
+        // FP.CPI.TOTL.ZG - Inflation
+        // SE.SEC.ENRR - secondary school
+        // EG.USE.COMM.FO.ZS - Fossil fuel
+        // GC.XPN.TOTL.GD.ZS - EXpense
+
+        // dummy test map
+        HashMap<String, Integer> testerMap = new HashMap<String, Integer>();
+        testerMap.put("SL.UEM.TOTL.ZS", 1);
+        testerMap.put("SP.URB.TOTL.ZS", 2);
+        testerMap.put("IC.TAX.TOTL.CP.ZS", 3);
+        testerMap.put("AG.LND.FRST.ZS", 3);
+        testerMap.put("GC.XPN.TOTL.GD.ZS", 3);
+
+        findCountry(testerMap); // this returns an array list of strings.
+    }
+
+    /**
+     * @param map: key = code for data and value is if that is a l/m/h priority
+     * @return Returns an ArrayList of strings with all the countries in order of awesomeness
+     */
+    public static ArrayList<String> findCountry(HashMap<String, Integer> map) {
+        ArrayList<CountryValue> Unemploment = new ArrayList<CountryValue>();
+        ArrayList<String> Ids = new ArrayList<String>();
+        for (Entry<String, Integer> entry : map.entrySet()) {
+
+            Ids.add(entry.getKey());
+        }
+
+
+        for (String id : Ids) {
+            ArrayList<CountryValue> temp = new ArrayList<CountryValue>();
+            HashMap<String, Float> mp = null;
+            try {
+                mp = getIndicatorDataByYear(id, 2012);
+            } catch (IOException | SAXException | ParserConfigurationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            for (Map.Entry<String, Float> entry : mp.entrySet()) {
+                temp.add(new CountryValue(entry.getKey(), entry.getValue()));
+
+
+            }
+
+            Collections.sort(temp, new CustomComparator());
+
+            float score = map.get(id);
+            for (CountryValue i : temp) {
+
+
+                boolean found = false;
+                for (CountryValue cv : MasterScoreKeeper) {
+                    if (cv.getName().equals(i.getName())) // just update the score
+                    {
+                        cv.setScore(score);
+                        found = true;
+                    }
+
+
+                }
+
+                if (found == false) {
+                    MasterScoreKeeper.add(i);
+                }
+
+
+                score /= 1.1;
+
+
+            }
+
+
+        }
+
+        ArrayList<String> places = new ArrayList<String>();
+
+        Collections.sort(MasterScoreKeeper, new CustomComparatorScore());
+        for (CountryValue cv : MasterScoreKeeper) {
+            places.add(cv.getName());
+
+            System.out.println(cv.getName() + " : " + cv.getScore());
+        }
+
+
+        return places;
+
+    }
 
     /**
      * Gets indicator data about a country.

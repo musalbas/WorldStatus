@@ -34,19 +34,19 @@ public class Pairer extends Activity implements OnSeekBarChangeListener {
             public void onClick(View arg0) {
                 // this can either be layout.setVisibility(100), if you want to hide it, or layout.setVisibility(View.GONE)
                 // if you want to compleatly distroy the layout. Your call.
-                layout.setVisibility(100);
+                layout.setAlpha(0.3f);
             }
         });
     }
 
     // if true, ignore when getting data
-    public boolean getVisible() {
-        if (layout.getVisibility() == 100) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    /*public boolean getVisible() {
+            if (layout.isVisible() == 100) {
+                return true;
+            } else {
+                return false;
+            }
+    }*/
 
     @Override
     public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
@@ -65,16 +65,25 @@ public class Pairer extends Activity implements OnSeekBarChangeListener {
 
     }
 
-    public void setGray() {
-        layout.setBackgroundColor(Color.GRAY);
+    public void setColor(int i, int j, int k) {
+        layout.setBackgroundColor(Color.rgb(i, j, k));
     }
+
+    public boolean isVisible() {
+        if (layout.getVisibility() == View.GONE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public void setVisibility(int i) {
         layout.setVisibility(i);
     }
 
-    public String getPercentig() {
-        return (String) percentig.getText();
+    public int getPercentage() {
+        return Integer.parseInt((String) percentig.getText());
     }
 
     public String getScenario() {
