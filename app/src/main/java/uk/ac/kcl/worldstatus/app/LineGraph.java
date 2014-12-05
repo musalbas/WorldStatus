@@ -30,6 +30,7 @@ public class LineGraph {
         TimeSeries series2 = new TimeSeries("AIDS infections.");
         TimeSeries series3 = new TimeSeries("Breast Cancer.");
 
+
         for (int i = 0; i < x.length; i++) {
             series.add(b[i], c[i]);
             series1.add(a[i], b[i]);
@@ -66,27 +67,32 @@ public class LineGraph {
         mRenderer.setLabelsColor(Color.LTGRAY);
         mRenderer.setClickEnabled(true);
         mRenderer.setSelectableBuffer(10);
+        mRenderer.setInScroll(true);
 
         XYSeriesRenderer renderer = new XYSeriesRenderer();
         renderer.setColor(Color.RED);
         renderer.setPointStyle(PointStyle.CIRCLE);
         renderer.setFillPoints(true);
         mRenderer.addSeriesRenderer(renderer);
+        mRenderer.setInScroll(true);
         renderer = new XYSeriesRenderer();
         renderer.setColor(Color.BLUE);
         renderer.setPointStyle(PointStyle.SQUARE);
         renderer.setFillPoints(true);
         mRenderer.addSeriesRenderer(renderer);
+        mRenderer.setInScroll(true);
         renderer = new XYSeriesRenderer();
         renderer.setColor(Color.YELLOW);
         renderer.setPointStyle(PointStyle.DIAMOND);
         renderer.setFillPoints(true);
         mRenderer.addSeriesRenderer(renderer);
+        mRenderer.setInScroll(true);
         renderer = new XYSeriesRenderer();
         renderer.setColor(Color.GREEN);
         renderer.setPointStyle(PointStyle.TRIANGLE);
         renderer.setFillPoints(true);
         mRenderer.addSeriesRenderer(renderer);
+        mRenderer.setInScroll(true);
 
         final GraphicalView graphView = ChartFactory.getLineChartView(context, dataset, mRenderer);
 
