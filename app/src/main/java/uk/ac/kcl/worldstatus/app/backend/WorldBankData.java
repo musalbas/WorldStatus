@@ -91,8 +91,11 @@ public class WorldBankData {
             HashMap<String, Float> mp = null;
             try {
                 mp = getIndicatorDataByYear(id, 2012);
-            } catch (IOException | SAXException | ParserConfigurationException e) {
-                // TODO Auto-generated catch block
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (ParserConfigurationException e) {
                 e.printStackTrace();
             }
             for (Map.Entry<String, Float> entry : mp.entrySet()) {
