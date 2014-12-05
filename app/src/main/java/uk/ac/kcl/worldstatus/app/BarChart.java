@@ -22,7 +22,7 @@ public class BarChart {
         int a[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         int b[] = {100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
 
-        int c[] = {0, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+        int c[] = {99, 88, 77, 66, 55, 44, 33, 22, 11, 10};
         int d[] = {13, 78, 14, 56, 99, 23, 100, 44, 3, 16};
 
         TimeSeries series = new TimeSeries("HIV infections.");
@@ -31,23 +31,10 @@ public class BarChart {
         TimeSeries series3 = new TimeSeries("Breast Cancer.");
 
         for (int i = 0; i < x.length; i++) {
-            if (i == 0) {
-
-                series.add(b[i], -1);
-                series1.add(a[i], b[i]);
-                series2.add(c[i], d[i]);
-                series3.add(a[i], d[i]);
-            } else if (i == 2) {
-                series.add(b[i], -1);
-                series1.add(a[i], b[i]);
-                series2.add(c[i], d[i]);
-                series3.add(a[i], d[i]);
-            } else {
-                series.add(b[i], c[i]);
-                series1.add(a[i], b[i]);
-                series2.add(c[i], d[i]);
-                series3.add(a[i], d[i]);
-            }
+            series.add(b[i], c[i]);
+            series1.add(a[i], b[i]);
+            series2.add(c[i], d[i]);
+            series3.add(a[i], d[i]);
         }
 
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
@@ -77,27 +64,34 @@ public class BarChart {
         mRenderer.setZoomLimits(new double[]{0, 12, 0, 100});
         mRenderer.setAxesColor(Color.DKGRAY);
         mRenderer.setLabelsColor(Color.LTGRAY);
+        mRenderer.setClickEnabled(true);
+        mRenderer.setSelectableBuffer(10);
+        mRenderer.setInScroll(true);
 
         XYSeriesRenderer renderer = new XYSeriesRenderer();
         renderer.setColor(Color.RED);
         renderer.setPointStyle(PointStyle.CIRCLE);
         renderer.setFillPoints(true);
         mRenderer.addSeriesRenderer(renderer);
+        mRenderer.setInScroll(true);
         renderer = new XYSeriesRenderer();
         renderer.setColor(Color.BLUE);
         renderer.setPointStyle(PointStyle.SQUARE);
         renderer.setFillPoints(true);
         mRenderer.addSeriesRenderer(renderer);
+        mRenderer.setInScroll(true);
         renderer = new XYSeriesRenderer();
         renderer.setColor(Color.YELLOW);
         renderer.setPointStyle(PointStyle.DIAMOND);
         renderer.setFillPoints(true);
         mRenderer.addSeriesRenderer(renderer);
+        mRenderer.setInScroll(true);
         renderer = new XYSeriesRenderer();
         renderer.setColor(Color.GREEN);
         renderer.setPointStyle(PointStyle.TRIANGLE);
         renderer.setFillPoints(true);
         mRenderer.addSeriesRenderer(renderer);
+        mRenderer.setInScroll(true);
 
         final GraphicalView graphView = ChartFactory.getLineChartView(context, dataset, mRenderer);
 
