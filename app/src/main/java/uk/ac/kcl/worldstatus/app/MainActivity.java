@@ -63,6 +63,18 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         return null;
     }
 
+    public boolean validateIndicators() {
+        boolean toReturn = true;
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (pairerArray[i].getScenario().equals(pairerArray[j].getScenario())) {
+                    toReturn = false;
+                }
+            }
+        }
+        return toReturn;
+    }
+
     public String getMetaCode(String s) {
         String toReturn = "";
         char w = s.charAt(0);
@@ -95,35 +107,47 @@ public class MainActivity extends ActionBarActivity implements Serializable {
 
         return toReturn;
     }
-/*
-    public void graphHandler(View v) {
-
-        HashMap<String, Integer> testerMap = new HashMap<String, Integer>();
-
-        testerMap.put(getMetaCode(test1.getScenario()), test1.getPercentage() + 1);
-        testerMap.put(getMetaCode(test2.getScenario()), test2.getPercentage() + 1);
-        testerMap.put(getMetaCode(test3.getScenario()), test3.getPercentage() + 1);
-        testerMap.put(getMetaCode(test4.getScenario()), test4.getPercentage() + 1);
-        testerMap.put(getMetaCode(test5.getScenario()), test5.getPercentage() + 1);
-
-        WorldBankData APIWrapper = new WorldBankData();
-
-
-        //this return an array list with
-        WorldBankData.findCountry(testerMap);
-
-    }*/
 
     public void graphHandler(View v) {
-        String countryName = "Bulgaria";
+
+        HashMap<String, Integer> indicators = new HashMap<String, Integer>();
+
+        for (int i = 0; i < 5; i++) {
+            if (pairerArray[i].isVisible()) {
+                indicators.put(getMetaCode(pairerArray[i].getScenario()), pairerArray[i].getPercentage() + 1);
+            }
+        }
+
+        /*for(int i = 0; i<5; i++){
+            if(pairerArray[i].isVisible()){
+                if(validateIndicators()){
+                    indicators.put(getMetaCode(pairerArray[i].getScenario()), pairerArray[i].getPercentage() +1);
+                }
+                else{
+                    Log.d("ERROR", "INVALID INDICATORS");
+                    break;
+                }
+            }
+        }*/
+
+        ParcelableMap parcelableIndicators = new ParcelableMap(indicators);
+
+        Intent intent = new Intent(MainActivity.this, GraphActivity.class);
+        intent.putExtra("indicators", parcelableIndicators);
+        startActivity(intent);
+    }
+
+
+
+   /* public void graphHandler(View v) {
+        *//*String countryName = "Bulgaria";
         HashMap<String, Double> indicatorDataMap = new HashMap<String, Double>();
         indicatorDataMap.put("unemployment", 43.5);
         indicatorDataMap.put("tax-rate", 13.8);
-        GraphData graphData = new GraphData();
+        GraphData graphData = new GraphData(countryName, indicatorDataMap);*//*
 
         Intent intent = new Intent(MainActivity.this, GraphActivity.class);
-        Bundle bundle = new Bundle();
-        intent.putExtra("graphData", "line"); // tell GraphActivity what kind of graph to draw
+        //intent.putExtra("graphData", graphData);
         startActivity(intent);
-    }
+    }*/
 }

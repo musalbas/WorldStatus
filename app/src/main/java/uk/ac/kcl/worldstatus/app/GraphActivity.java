@@ -1,30 +1,32 @@
 package uk.ac.kcl.worldstatus.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import org.achartengine.GraphicalView;
+import uk.ac.kcl.worldstatus.app.backend.LegacyDataGrabber;
+
+import java.util.HashMap;
 
 /**
  * Created by Kristin on 22-11-14.
  */
 public class GraphActivity extends Activity {
+    private LegacyDataGrabber data;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_graph);
+        setContentView(R.layout.activity_graph); //set to loading layout
 
-        Intent intent = getIntent();
-        String graphType = intent.getStringExtra("graphType");
-        //depending on graphType draw the graph. Draws a Line Graph by default atm.
+        Bundle extras = getIntent().getExtras();
+        ParcelableMap pMap = extras.getParcelable("indicators");
+        HashMap<String, Integer> indicators = pMap.getIndicatorDataMap();
 
-        LineGraph line = new LineGraph();
-        GraphicalView lineView = line.getView(this);
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.chart);
-        frameLayout.addView(lineView);
+        GrabDataGraph grabDataGraph = new GrabDataGraph();
+        grabDataGraph.execute(indicators);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,5 +52,20 @@ public class GraphActivity extends Activity {
 
     public android.support.v4.app.FragmentManager getSupportFragmentManager() {
         return null;
+    }
+
+    public class GrabDataGraph extends GrabData {
+        @Override
+        public void onPostExecute(GraphData graphData) {
+            LegacyDataGrabber data = graphData.getData();
+            String countryName = graphData.getCountryName();
+            int year = graphData.getYear();
+            HashMap<String, Float> indicatorDataMap = graphData.getIndicatorDataMap();
+
+            BarChart line = new BarChart();
+            GraphicalView lineView = line.getView(GraphActivity.this);
+            FrameLayout frameLayout = (FrameLayout) findViewById(R.id.chart);
+            frameLayout.addView(lineView);
+        }
     }
 }

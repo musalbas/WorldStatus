@@ -1,50 +1,45 @@
 package uk.ac.kcl.worldstatus.app;
 
 import android.os.AsyncTask;
-import org.json.JSONException;
-import org.xml.sax.SAXException;
+import uk.ac.kcl.worldstatus.app.backend.LegacyDataGrabber;
 import uk.ac.kcl.worldstatus.app.backend.WorldBankData;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by mus on 05/12/14.
  */
-public class GrabData extends AsyncTask<HashMap<String, Integer>, Void, HashMap<String, ArrayList<Float[]>>> {
+public class GrabData extends AsyncTask<HashMap<String, Integer>, Void, GraphData> {
 
-    private String country;
-
-    protected HashMap<String, ArrayList<Float[]>> doInBackground(HashMap<String, Integer>... maps) {
+    @Override
+    protected GraphData doInBackground(HashMap<String, Integer>... maps) {
         HashMap<String, Integer> map = maps[0];
+        LegacyDataGrabber data = WorldBankData.findCountry(map);
+        GraphData graphData = new GraphData(data);
 
-        String country = WorldBankData.findCountry(map).get(0);
-        this.country = country;
-
-        HashMap<String, ArrayList<Float[]>> result = new HashMap<String, ArrayList<Float[]>>();
-
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            try {
-                result.put(entry.getKey(), WorldBankData.getIndicatorDataByCountry(country, entry.getKey(), 2007, 2012));
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return result;
+        return graphData;
     }
 
-    protected void onPostExecute(HashMap<String, ArrayList<Float[]>> result) {
-        // do something with result and this.country
+    /*
+     private boolean haveNetworkConnection() {
+         boolean haveConnectedWifi = false;
+         boolean haveConnectedMobile = false;
+
+         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+         NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+         for (NetworkInfo ni : netInfo) {
+             if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                 if (ni.isConnected())
+                     haveConnectedWifi = true;
+             if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                 if (ni.isConnected())
+                     haveConnectedMobile = true;
+         }
+         return haveConnectedWifi || haveConnectedMobile;
+     }
+ */
+    protected void onPostExecute(GraphData graphData) {
     }
+
 
 }

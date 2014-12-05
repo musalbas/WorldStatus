@@ -1,55 +1,38 @@
 package uk.ac.kcl.worldstatus.app;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import uk.ac.kcl.worldstatus.app.backend.LegacyDataGrabber;
 
 import java.util.HashMap;
 
 /**
  * Created by Kristin on 05-12-14.
  */
-public class GraphData implements Parcelable {
-
+public class GraphData {
+    private LegacyDataGrabber data;
     private String countryName;
-    private HashMap<String, Double> indicatorDataMap;
+    private int year;
+    private HashMap<String, Float> indicatorDataMap;
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public GraphData(LegacyDataGrabber data) {
+        this.data = data;
+        this.countryName = data.getName();
+        this.year = 2012; //by default the app will display the latest data
+        this.indicatorDataMap = data.getDataByYear(year);
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-        dest.writeString(countryName);
-        dest.writeMap(indicatorDataMap);
+    public LegacyDataGrabber getData() {
+        return data;
     }
-
-    public GraphData() {
-
-    }
-
-    public GraphData(Parcel in) {
-        this.countryName = in.readString();
-        this.indicatorDataMap = in.readHashMap(Double.class.getClassLoader());
-    }
-
-    @SuppressWarnings("unchecked")
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public GraphData createFromParcel(Parcel in) {
-            return new GraphData(in);
-        }
-
-        public GraphData[] newArray(int size) {
-            return new GraphData[size];
-        }
-    };
 
     public String getCountryName() {
         return countryName;
     }
 
-    public HashMap<String, Double> getIndicatorDataMap() {
+    public int getYear() {
+        return year;
+    }
+
+    public HashMap<String, Float> getIndicatorDataMap() {
         return indicatorDataMap;
     }
 }

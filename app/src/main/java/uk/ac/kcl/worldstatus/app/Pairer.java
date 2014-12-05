@@ -14,80 +14,91 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  */
 public class Pairer extends Activity implements OnSeekBarChangeListener {
 
-    private SeekBar scrollIt;
-    private Spinner spinnIt;
-    private TextView percentig;
+    private SeekBar seekbar;
+    private Spinner spinner;
+    private TextView percentage;
     private LinearLayout layout;
     private Button button;
 
     public Pairer(SeekBar seekBar, TextView textView, Spinner spinn, LinearLayout linLay, Button b) {
-        this.scrollIt = seekBar;
-        this.percentig = textView;
-        this.spinnIt = spinn;
+        this.seekbar = seekBar;
+        this.percentage = textView;
+        this.spinner = spinn;
         this.layout = linLay;
         this.button = b;
-        scrollIt.setOnSeekBarChangeListener(this);
+
+        seekbar.setOnSeekBarChangeListener(this);
+
+        button.setEnabled(true);
 
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                // this can either be layout.setVisibility(100), if you want to hide it, or layout.setVisibility(View.GONE)
-                // if you want to compleatly distroy the layout. Your call.
-                layout.setAlpha(0.3f);
+
+                if (isVisible()) {
+                    layout.setAlpha(0.3f);
+                    seekbar.setEnabled(false);
+                    spinner.setEnabled(false);
+                } else {
+                    layout.setAlpha(1.0f);
+                    button.setText("X");
+                    seekbar.setEnabled(true);
+                    spinner.setEnabled(true);
+                }
             }
         });
     }
 
-    // if true, ignore when getting data
-    /*public boolean getVisible() {
-            if (layout.isVisible() == 100) {
-                return true;
-            } else {
-                return false;
-            }
-    }*/
-
-    @Override
-    public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
-        int temp = scrollIt.getProgress();
-        switch (temp) {
-            case 0:
-                percentig.setText("Low");
-                break;
-            case 1:
-                percentig.setText("Medium");
-                break;
-            case 2:
-                percentig.setText("High");
-                break;
-        }
+    public void clickMe(View view) {
 
     }
 
-    public void setColor(int i, int j, int k) {
-        layout.setBackgroundColor(Color.rgb(i, j, k));
+    public Button getButton() {
+        return button;
     }
 
     public boolean isVisible() {
-        if (layout.getVisibility() == View.GONE) {
+        if (layout.getAlpha() == 1.0f) {
             return true;
         } else {
             return false;
         }
     }
 
+    @Override
+    public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+        int temp = seekbar.getProgress();
+        switch (temp) {
+            case 0:
+                percentage.setText("Low");
+                setColor(253, 245, 230);
+                break;
+            case 1:
+                percentage.setText("Medium");
+                setColor(255, 231, 186);
+                break;
+            case 2:
+                percentage.setText("High");
+                setColor(205, 186, 150);
+                break;
+        }
+    }
+
+    public void setColor(int i, int j, int k) {
+        layout.setBackgroundColor(Color.rgb(i, j, k));
+    }
 
     public void setVisibility(int i) {
         layout.setVisibility(i);
     }
 
     public int getPercentage() {
-        return Integer.parseInt((String) percentig.getText());
+        return seekbar.getProgress();
     }
 
     public String getScenario() {
-        return (String) spinnIt.getSelectedItem();
+        return (String) spinner.getSelectedItem();
     }
 
     @Override

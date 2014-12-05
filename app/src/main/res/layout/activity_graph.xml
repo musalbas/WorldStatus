@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2">
-           
+
         <Spinner
                 android:layout_width="220dp"
                 android:layout_height="46dp"
@@ -19,8 +19,8 @@
                 android:entries="@array/start_year"
                 android:prompt="@string/year_prompt"
                 android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="42dp"
-                android:onClick="selectYearMethod"/>
+                android:layout_marginLeft="42dp"/>
+        <!-- android:onClick="selectYearMethod"-->
         <Spinner
                 android:layout_width="220dp"
                 android:layout_height="46dp"
@@ -28,8 +28,8 @@
                 android:entries="@array/end_year"
                 android:prompt="@string/year_prompt"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="42dp"
-                android:onClick="endYearMethod"/>/>
+                android:layout_marginRight="42dp"/>
+        <!--android:onClick="endYearMethod"-->
     </FrameLayout>
 
     <FrameLayout

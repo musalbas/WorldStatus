@@ -1,6 +1,5 @@
 package uk.ac.kcl.worldstatus.app.backend;
 
-import org.json.JSONException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -29,10 +28,6 @@ public class WorldBankData {
     // 3 = we want places with a high %
     public static ArrayList<CountryValue> MasterScoreKeeper = new ArrayList<CountryValue>();
 
-    public WorldBankData() {
-
-    }
-
     public static void main(String[] args) {
         // use 2012
         // SL.UEM.TOTL.ZS - Unemployment
@@ -52,23 +47,46 @@ public class WorldBankData {
         testerMap.put("AG.LND.FRST.ZS", 3);
         testerMap.put("GC.XPN.TOTL.GD.ZS", 3);
 
-        findCountry(testerMap); // this returns an array list of strings.
+
+        LegacyDataGrabber lDG = findCountry(testerMap); // this returns a LegacyDataGrabber obj.
+
+        int index = 0;
+        for (ArrayList<Float[]> af : lDG.getData())  // this loops between indicators
+        {
+            System.out.println("Idicator's code: " + lDG.getIndicators()[index]);
+            for (Float[] pairs : af) // this loops through years
+            {
+                System.out.println(pairs[0] + " " + pairs[1]); // prints the year and the data
+            }
+
+            index++;
+        }
+
+        System.out.println(lDG.getData().size());
+        System.out.println(lDG.getData().get(4).size());
+
+
     }
 
     /**
      * @param map: key = code for data and value is if that is a l/m/h priority
      * @return Returns an ArrayList of strings with all the countries in order of awesomeness
      */
-    public static ArrayList<String> findCountry(HashMap<String, Integer> map) {
+    public static LegacyDataGrabber findCountry(HashMap<String, Integer> map) {
         ArrayList<CountryValue> Unemploment = new ArrayList<CountryValue>();
         ArrayList<String> Ids = new ArrayList<String>();
+        String[] idicators = new String[5];
+        int indexIndicators = 0;
         for (Entry<String, Integer> entry : map.entrySet()) {
 
+            idicators[indexIndicators] = entry.getKey();
+            indexIndicators++;
             Ids.add(entry.getKey());
         }
 
 
         for (String id : Ids) {
+
             ArrayList<CountryValue> temp = new ArrayList<CountryValue>();
             HashMap<String, Float> mp = null;
             try {
@@ -84,6 +102,7 @@ public class WorldBankData {
             }
 
             Collections.sort(temp, new CustomComparator());
+
 
             float score = map.get(id);
             for (CountryValue i : temp) {
@@ -119,14 +138,53 @@ public class WorldBankData {
         for (CountryValue cv : MasterScoreKeeper) {
             places.add(cv.getName());
 
-            System.out.println(cv.getName() + " : " + cv.getScore());
+            //System.out.println(cv.getName() + " : " + cv.getScore());
+        }
+
+        ArrayList<ArrayList<Float[]>> legacyData = new ArrayList<ArrayList<Float[]>>();
+        for (Entry<String, Integer> entry : map.entrySet()) {
+
+            try {
+
+//				legacyData.add(getIndicatorDataByCountry("AR", entry.getKey(),2008,2012));
+                ArrayList<Float[]> tempFloats = new ArrayList<Float[]>();
+                for (int k = 2008; k < 2013; ++k) {
+                    HashMap<String, Float> data = null;
+                    try {
+                        data = getIndicatorDataByYear(entry.getKey(), k);
+
+                    } catch (IOException e) // throws IOException, SAXException, ParserConfigurationException
+                    {
+                        e.printStackTrace();
+                    } catch (SAXException e) {
+                        e.printStackTrace();
+                    } catch (ParserConfigurationException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    for (Entry<String, Float> dataEntry : data.entrySet()) {
+                        String name = dataEntry.getKey();
+                        if (name.equals(MasterScoreKeeper.get(0).getName())) {
+                            tempFloats.add(new Float[]{(float) k, data.get(name)});
+                        }
+                    }
+                }
+
+                legacyData.add(tempFloats);
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+
         }
 
 
-        return places;
+        return new LegacyDataGrabber(legacyData, MasterScoreKeeper.get(0).getName(), idicators);
 
     }
-
     /**
      * Gets indicator data about a country.
      *
@@ -134,11 +192,28 @@ public class WorldBankData {
      * @param indicator The name of a development indicator.
      * @return An ArrayList of [x, y] data points.
      */
-    public static ArrayList<Float[]> getIndicatorDataByCountry(String country, String indicator, int fromYear, int toYear) throws IOException, JSONException, ParserConfigurationException, SAXException {
-        String XMLString = Utils.getDataFromURL("http://api.worldbank.org/countries/" + country + "/indicators/" + indicator + "?per_page=1000&date=" + fromYear + ":" + toYear + "&format=xml");
+
+
+    public static ArrayList<Float[]> getIndicatorDataByCountry(String country, String indicator, int fromYear, int toYear) {
+        String XMLString = null;
+        try {
+            XMLString = Utils.getDataFromURL("http://api.worldbank.org/countries/" + country + "/indicators/" + indicator + "?per_page=1000&date=" + fromYear + ":" + toYear + "&format=xml");
+        } catch (IOException e) {
+            //TODO handle when user loses connection
+            e.printStackTrace();
+        }
 
         XMLString = XMLString.substring(3);
-        Document document = Utils.getDocumentFromString(XMLString);
+        Document document = null;
+        try {
+            document = Utils.getDocumentFromString(XMLString);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
 
         NodeList nodeList = document.getElementsByTagName("wb:data");
 

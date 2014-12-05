@@ -14,7 +14,7 @@ import org.achartengine.renderer.XYSeriesRenderer;
 /**
  * Created by Kristin on 21-11-14.
  */
-public class LineGraph {
+public class BarChart {
     public GraphicalView getView(Context context) {
         int x[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int y[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
@@ -22,7 +22,7 @@ public class LineGraph {
         int a[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         int b[] = {100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
 
-        int c[] = {99, 88, 77, 66, 55, 44, 33, 22, 11, 10};
+        int c[] = {0, 20, 30, 40, 50, 60, 70, 80, 90, 100};
         int d[] = {13, 78, 14, 56, 99, 23, 100, 44, 3, 16};
 
         TimeSeries series = new TimeSeries("HIV infections.");
@@ -31,10 +31,23 @@ public class LineGraph {
         TimeSeries series3 = new TimeSeries("Breast Cancer.");
 
         for (int i = 0; i < x.length; i++) {
-            series.add(b[i], c[i]);
-            series1.add(a[i], b[i]);
-            series2.add(c[i], d[i]);
-            series3.add(a[i], d[i]);
+            if (i == 0) {
+
+                series.add(b[i], -1);
+                series1.add(a[i], b[i]);
+                series2.add(c[i], d[i]);
+                series3.add(a[i], d[i]);
+            } else if (i == 2) {
+                series.add(b[i], -1);
+                series1.add(a[i], b[i]);
+                series2.add(c[i], d[i]);
+                series3.add(a[i], d[i]);
+            } else {
+                series.add(b[i], c[i]);
+                series1.add(a[i], b[i]);
+                series2.add(c[i], d[i]);
+                series3.add(a[i], d[i]);
+            }
         }
 
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
@@ -64,8 +77,6 @@ public class LineGraph {
         mRenderer.setZoomLimits(new double[]{0, 12, 0, 100});
         mRenderer.setAxesColor(Color.DKGRAY);
         mRenderer.setLabelsColor(Color.LTGRAY);
-        mRenderer.setClickEnabled(true);
-        mRenderer.setSelectableBuffer(10);
 
         XYSeriesRenderer renderer = new XYSeriesRenderer();
         renderer.setColor(Color.RED);
