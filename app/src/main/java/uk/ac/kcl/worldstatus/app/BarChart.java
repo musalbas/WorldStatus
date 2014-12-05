@@ -3,11 +3,11 @@ package uk.ac.kcl.worldstatus.app;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
-import org.achartengine.chart.PointStyle;
-import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
@@ -15,85 +15,87 @@ import org.achartengine.renderer.XYSeriesRenderer;
  * Created by Kristin on 21-11-14.
  */
 public class BarChart {
+    private String[] Years = new String[]{
+            "2001", "2002", "2003", "2004", "2005", "2006",
+            "2007", "2008", "2009", "2010", "2011", "2012"
+
+    };
+
     public GraphicalView getView(Context context) {
-        int x[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        int y[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+        int[] x = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+        int[] disease1 = {2000, 2500, 2700, 3000, 2800, 3500, 3700, 3800, 0, 0, 0, 0};
+        int[] disease2 = {2200, 2700, 2900, 2800, 2600, 3000, 3300, 3400, 0, 0, 0, 0};
 
-        int a[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        int b[] = {100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
+        XYSeries disease1Series = new XYSeries("disease1");
+        XYSeries disease2Series = new XYSeries("disease2");
 
-        int c[] = {99, 88, 77, 66, 55, 44, 33, 22, 11, 10};
-        int d[] = {13, 78, 14, 56, 99, 23, 100, 44, 3, 16};
-
-        TimeSeries series = new TimeSeries("HIV infections.");
-        TimeSeries series1 = new TimeSeries("Ebola infection.");
-        TimeSeries series2 = new TimeSeries("AIDS infections.");
-        TimeSeries series3 = new TimeSeries("Breast Cancer.");
-
+        // Adding data to Income and Expense Series
         for (int i = 0; i < x.length; i++) {
-            series.add(b[i], c[i]);
-            series1.add(a[i], b[i]);
-            series2.add(c[i], d[i]);
-            series3.add(a[i], d[i]);
+            disease1Series.add(i, disease1[i]);
+            disease2Series.add(i, disease2[i]);
         }
 
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-        dataset.addSeries(series);
-        dataset.addSeries(series1);
-        dataset.addSeries(series2);
-        dataset.addSeries(series3);
 
-        XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
-        mRenderer.setChartTitle("Percentage of infections compared to time");
-        mRenderer.setAxisTitleTextSize(16);
-        mRenderer.setChartTitleTextSize(45);
-        mRenderer.setLabelsTextSize(27);
-        mRenderer.setLegendTextSize(60);
-        mRenderer.setLegendHeight(1150);
-        mRenderer.setFitLegend(true);
-        mRenderer.setPointSize(8f);
-        mRenderer.setMargins(new int[]{50, 40, 85, 40});
-        mRenderer.setYLabelsAlign(Paint.Align.RIGHT);
-        mRenderer.setMarginsColor(Color.BLACK);
-        mRenderer.setApplyBackgroundColor(true);
-        mRenderer.setBackgroundColor(Color.DKGRAY);
-        mRenderer.setPanEnabled(false, true);
-        mRenderer.setZoomRate(10.2f);
-        mRenderer.setZoomEnabled(true, true);
-        mRenderer.setPanLimits(new double[]{0, 12, 0, 100});
-        mRenderer.setZoomLimits(new double[]{0, 12, 0, 100});
-        mRenderer.setAxesColor(Color.DKGRAY);
-        mRenderer.setLabelsColor(Color.LTGRAY);
-        mRenderer.setClickEnabled(true);
-        mRenderer.setSelectableBuffer(10);
-        mRenderer.setInScroll(true);
+        dataset.addSeries(disease1Series);
+        dataset.addSeries(disease2Series);
 
-        XYSeriesRenderer renderer = new XYSeriesRenderer();
-        renderer.setColor(Color.RED);
-        renderer.setPointStyle(PointStyle.CIRCLE);
-        renderer.setFillPoints(true);
-        mRenderer.addSeriesRenderer(renderer);
-        mRenderer.setInScroll(true);
-        renderer = new XYSeriesRenderer();
-        renderer.setColor(Color.BLUE);
-        renderer.setPointStyle(PointStyle.SQUARE);
-        renderer.setFillPoints(true);
-        mRenderer.addSeriesRenderer(renderer);
-        mRenderer.setInScroll(true);
-        renderer = new XYSeriesRenderer();
-        renderer.setColor(Color.YELLOW);
-        renderer.setPointStyle(PointStyle.DIAMOND);
-        renderer.setFillPoints(true);
-        mRenderer.addSeriesRenderer(renderer);
-        mRenderer.setInScroll(true);
-        renderer = new XYSeriesRenderer();
-        renderer.setColor(Color.GREEN);
-        renderer.setPointStyle(PointStyle.TRIANGLE);
-        renderer.setFillPoints(true);
-        mRenderer.addSeriesRenderer(renderer);
-        mRenderer.setInScroll(true);
+        XYSeriesRenderer disease1Renderer = new XYSeriesRenderer();
+        disease1Renderer.setColor(Color.CYAN);
+        disease1Renderer.setFillPoints(true);
+        disease1Renderer.setLineWidth(2);
+        disease1Renderer.setDisplayChartValues(true);
+        disease1Renderer.setDisplayChartValuesDistance(10);
 
-        final GraphicalView graphView = ChartFactory.getLineChartView(context, dataset, mRenderer);
+        XYSeriesRenderer disease2Renderer = new XYSeriesRenderer();
+        disease2Renderer.setColor(Color.GREEN);
+        disease2Renderer.setFillPoints(true);
+        disease2Renderer.setLineWidth(2);
+        disease2Renderer.setDisplayChartValues(true);
+
+        XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
+        multiRenderer.setOrientation(XYMultipleSeriesRenderer.Orientation.HORIZONTAL);
+        multiRenderer.setXLabels(0);
+        multiRenderer.setChartTitle("Disease1 vs Disease2 Chart");
+        multiRenderer.setXTitle("Years");
+        multiRenderer.setYTitle("Amount effected");
+        multiRenderer.setChartTitleTextSize(28);
+        multiRenderer.setAxisTitleTextSize(24);
+        multiRenderer.setLabelsTextSize(24);
+        multiRenderer.setZoomButtonsVisible(false);
+
+        multiRenderer.setPanEnabled(false, false);
+        multiRenderer.setClickEnabled(false);
+        multiRenderer.setZoomEnabled(false, false);
+        multiRenderer.setShowGridY(false);
+        multiRenderer.setShowGridX(false);
+        multiRenderer.setFitLegend(true);
+        multiRenderer.setShowGrid(false);
+        multiRenderer.setZoomEnabled(false);
+        multiRenderer.setExternalZoomEnabled(false);
+        multiRenderer.setAntialiasing(true);
+        multiRenderer.setInScroll(false);
+        multiRenderer.setLegendHeight(30);
+        multiRenderer.setXLabelsAlign(Paint.Align.CENTER);
+        multiRenderer.setYLabelsAlign(Paint.Align.LEFT);
+        multiRenderer.setTextTypeface("sans_serif", Typeface.NORMAL);
+        multiRenderer.setYLabels(10);
+        multiRenderer.setYAxisMax(4000);
+        multiRenderer.setXAxisMin(-0.5);
+        multiRenderer.setXAxisMax(11);
+        multiRenderer.setBarSpacing(0.5);
+        multiRenderer.setBackgroundColor(Color.TRANSPARENT);
+        //multiRenderer.setMarginsColor(getResources().getColor(R.color.transparent_background));
+        multiRenderer.setApplyBackgroundColor(true);
+
+        multiRenderer.setMargins(new int[]{30, 30, 30, 30});
+        for (int i = 0; i < x.length; i++) {
+            multiRenderer.addXTextLabel(i, Years[i]);
+        }
+        multiRenderer.addSeriesRenderer(disease1Renderer);
+        multiRenderer.addSeriesRenderer(disease2Renderer);
+
+        final GraphicalView graphView = ChartFactory.getBarChartView(context, dataset, multiRenderer, org.achartengine.chart.BarChart.Type.DEFAULT);
 
         return graphView;
     }

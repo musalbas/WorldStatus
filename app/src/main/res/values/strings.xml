@@ -9,15 +9,15 @@
     <string name="year_prompt">Year</string>
 
     <string-array name="options">
-    
-        <item> 1.Umemployment</item>
-        <item> 2.Urban population</item>
-        <item> 3.Tax rate</item>
-        <item> 4.Forest area</item>
-        <item> 5.Inflation</item>
-        <item> 6.Secondary school enrolment</item>
-        <item> 7.Fossil fuel consumption</item>
-        <item> 8.Expense (of GDP)</item>
+
+        <item>1. High Umemployment</item>
+        <item>2. High Urban population</item>
+        <item>3. High Tax rate</item>
+        <item>4. High Forest area</item>
+        <item>5. High Inflation</item>
+        <item>6. High Secondary school enrolment</item>
+        <item>7. High Fossil fuel consumption</item>
+        <item>8. High Expense (of GDP)</item>
 
     </string-array>
 

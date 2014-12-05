@@ -3,6 +3,7 @@ package uk.ac.kcl.worldstatus.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,16 +64,17 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         return null;
     }
 
-    public boolean validateIndicators() {
-        boolean toReturn = true;
+    public boolean validateIndicators(Pairer p) {
+        int counter = 0;
         for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                if (pairerArray[i].getScenario().equals(pairerArray[j].getScenario())) {
-                    toReturn = false;
-                }
+            if (p.getScenario().equals(pairerArray[i].getScenario())) {
+                counter++;
+            }
+            if (counter > 1) {
+                return false;
             }
         }
-        return toReturn;
+        return true;
     }
 
     public String getMetaCode(String s) {
@@ -113,23 +115,16 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         HashMap<String, Integer> indicators = new HashMap<String, Integer>();
 
         for (int i = 0; i < 5; i++) {
-            if (pairerArray[i].isVisible()) {
-                indicators.put(getMetaCode(pairerArray[i].getScenario()), pairerArray[i].getPercentage() + 1);
-            }
-        }
-
-        /*for(int i = 0; i<5; i++){
             if(pairerArray[i].isVisible()){
-                if(validateIndicators()){
-                    indicators.put(getMetaCode(pairerArray[i].getScenario()), pairerArray[i].getPercentage() +1);
+                if (validateIndicators(pairerArray[i])) {
+                    indicators.put(getMetaCode(pairerArray[i].getScenario()), pairerArray[i].getImportance() + 1);
                 }
                 else{
                     Log.d("ERROR", "INVALID INDICATORS");
-                    break;
                 }
             }
-        }*/
-
+        }
+        //TODO don't allow to proceed to next activity if wrong indicators
         ParcelableMap parcelableIndicators = new ParcelableMap(indicators);
 
         Intent intent = new Intent(MainActivity.this, GraphActivity.class);
@@ -137,17 +132,4 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         startActivity(intent);
     }
 
-
-
-   /* public void graphHandler(View v) {
-        *//*String countryName = "Bulgaria";
-        HashMap<String, Double> indicatorDataMap = new HashMap<String, Double>();
-        indicatorDataMap.put("unemployment", 43.5);
-        indicatorDataMap.put("tax-rate", 13.8);
-        GraphData graphData = new GraphData(countryName, indicatorDataMap);*//*
-
-        Intent intent = new Intent(MainActivity.this, GraphActivity.class);
-        //intent.putExtra("graphData", graphData);
-        startActivity(intent);
-    }*/
 }

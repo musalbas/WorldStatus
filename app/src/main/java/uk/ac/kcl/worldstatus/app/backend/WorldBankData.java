@@ -73,13 +73,13 @@ public class WorldBankData {
      * @return Returns an ArrayList of strings with all the countries in order of awesomeness
      */
     public static LegacyDataGrabber findCountry(HashMap<String, Integer> map) {
-        ArrayList<CountryValue> Unemploment = new ArrayList<CountryValue>();
+
         ArrayList<String> Ids = new ArrayList<String>();
-        String[] idicators = new String[5];
+        String[] idicators = new String[map.size()];
         int indexIndicators = 0;
         for (Entry<String, Integer> entry : map.entrySet()) {
 
-            idicators[indexIndicators] = entry.getKey();
+            idicators[indexIndicators] = entry.getKey(); // saving for later
             indexIndicators++;
             Ids.add(entry.getKey());
         }

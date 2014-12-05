@@ -93,7 +93,7 @@ public class Pairer extends Activity implements OnSeekBarChangeListener {
         layout.setVisibility(i);
     }
 
-    public int getPercentage() {
+    public int getImportance() {
         return seekbar.getProgress();
     }
 
