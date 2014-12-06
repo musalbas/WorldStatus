@@ -93,7 +93,7 @@ public class WorldBankData {
             try {
                 ArrayList<Float[]> tempFloats = new ArrayList<Float[]>();
 
-                for (int k = 2008; k < 2013; ++k) {
+                for (int k = 2012; k < 2013; ++k) {
                     HashMap<String, Float> data = null;
                     try {
                         data = getIndicatorDataByYear(entry.getKey(), k);
