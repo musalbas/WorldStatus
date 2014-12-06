@@ -28,7 +28,7 @@ public class WorldBankData {
      * @param map: key = code for data and value is if that is a l/m/h priority.
      * @return Returns an ArrayList of strings with all the countries in order of awesomeness.
      */
-    public static LegacyDataGrabber findCountry(HashMap<String, Integer> map) {
+    public static LegacyDataGrabber findCountry(HashMap<String, Integer> map) throws ParserConfigurationException, SAXException, IOException {
         ArrayList<String> Ids = new ArrayList<String>();
         String[] indicators = new String[map.size()];
         int indexIndicators = 0;
@@ -43,15 +43,7 @@ public class WorldBankData {
         for (String id : Ids) {
             ArrayList<CountryValue> temp = new ArrayList<CountryValue>();
             HashMap<String, Float> mp = null;
-            try {
-                mp = getIndicatorDataByYear(id, 2012);
-            } catch (IOException e) { // TODO deal with exceptions
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            }
+            mp = getIndicatorDataByYear(id, 2012);
 
             for (Map.Entry<String, Float> entry : mp.entrySet()) {
                 temp.add(new CountryValue(entry.getKey(), entry.getValue()));
@@ -90,34 +82,21 @@ public class WorldBankData {
         ArrayList<ArrayList<Float[]>> legacyData = new ArrayList<ArrayList<Float[]>>();
 
         for (Entry<String, Integer> entry : map.entrySet()) {
-            try {
-                ArrayList<Float[]> tempFloats = new ArrayList<Float[]>();
+            ArrayList<Float[]> tempFloats = new ArrayList<Float[]>();
 
-                for (int k = 2012; k < 2013; ++k) {
-                    HashMap<String, Float> data = null;
-                    try {
-                        data = getIndicatorDataByYear(entry.getKey(), k);
-                    } catch (IOException e) { // TODO deal with exceptions
-                        e.printStackTrace();
-                    } catch (SAXException e) {
-                        e.printStackTrace();
-                    } catch (ParserConfigurationException e) {
-                        e.printStackTrace();
-                    }
+            for (int k = 2012; k < 2013; ++k) {
+                HashMap<String, Float> data = null;
+                data = getIndicatorDataByYear(entry.getKey(), k);
 
-                    for (Entry<String, Float> dataEntry : data.entrySet()) {
-                        String name = dataEntry.getKey();
-                        if (name.equals(MasterScoreKeeper.get(0).getName())) {
-                            tempFloats.add(new Float[]{(float) k, data.get(name)});
-                        }
+                for (Entry<String, Float> dataEntry : data.entrySet()) {
+                    String name = dataEntry.getKey();
+                    if (name.equals(MasterScoreKeeper.get(0).getName())) {
+                        tempFloats.add(new Float[]{(float) k, data.get(name)});
                     }
                 }
-
-                legacyData.add(tempFloats);
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             }
+
+            legacyData.add(tempFloats);
         }
 
         return new LegacyDataGrabber(legacyData, MasterScoreKeeper.get(0).getName(), indicators);
@@ -130,26 +109,13 @@ public class WorldBankData {
      * @param indicator The name of a development indicator.
      * @return An ArrayList of [x, y] data points.
      */
-    public static ArrayList<Float[]> getIndicatorDataByCountry(String country, String indicator, int fromYear, int toYear) {
+    public static ArrayList<Float[]> getIndicatorDataByCountry(String country, String indicator, int fromYear, int toYear) throws IOException, ParserConfigurationException, SAXException {
         String XMLString = null;
-        try {
-            XMLString = Utils.getDataFromURL("http://api.worldbank.org/countries/" + country + "/indicators/" + indicator + "?per_page=1000&date=" + fromYear + ":" + toYear + "&format=xml");
-        } catch (IOException e) {
-            //TODO handle when user loses connection
-            e.printStackTrace();
-        }
+        XMLString = Utils.getDataFromURL("http://api.worldbank.org/countries/" + country + "/indicators/" + indicator + "?per_page=1000&date=" + fromYear + ":" + toYear + "&format=xml");
 
         XMLString = XMLString.substring(3);
         Document document = null;
-        try {
-            document = Utils.getDocumentFromString(XMLString);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
+        document = Utils.getDocumentFromString(XMLString);
 
         NodeList nodeList = document.getElementsByTagName("wb:data");
 
