@@ -19,120 +19,65 @@ import java.util.Map.Entry;
  */
 public class WorldBankData {
 
-    // Method that takes 5 key value pairs of country and importance.
-    // Then spits out the top scoring country
-
-
-    // 1 = we want places with a low %
-    // 2 = we want place with the avg %
-    // 3 = we want places with a high %
+    /**
+     * Keeps track of score for countries.
+     */
     public static ArrayList<CountryValue> MasterScoreKeeper = new ArrayList<CountryValue>();
 
-    public static void main(String[] args) {
-        // use 2012
-        // SL.UEM.TOTL.ZS - Unemployment
-        // SP.URB.TOTL.ZS - Urban population
-        // IC.TAX.TOTL.CP.ZS - Tax Rate
-        // AG.LND.FRST.ZS - Forest Area
-        // FP.CPI.TOTL.ZG - Inflation
-        // SE.SEC.ENRR - secondary school
-        // EG.USE.COMM.FO.ZS - Fossil fuel
-        // GC.XPN.TOTL.GD.ZS - EXpense
-
-        // dummy test map
-        HashMap<String, Integer> testerMap = new HashMap<String, Integer>();
-        testerMap.put("SL.UEM.TOTL.ZS", 1);
-        testerMap.put("SP.URB.TOTL.ZS", 2);
-        testerMap.put("IC.TAX.TOTL.CP.ZS", 3);
-        testerMap.put("AG.LND.FRST.ZS", 3);
-        testerMap.put("GC.XPN.TOTL.GD.ZS", 3);
-
-
-        LegacyDataGrabber lDG = findCountry(testerMap); // this returns a LegacyDataGrabber obj.
-
-        int index = 0;
-        for (ArrayList<Float[]> af : lDG.getData())  // this loops between indicators
-        {
-            System.out.println("Idicator's code: " + lDG.getIndicators()[index]);
-            for (Float[] pairs : af) // this loops through years
-            {
-                System.out.println(pairs[0] + " " + pairs[1]); // prints the year and the data
-            }
-
-            index++;
-        }
-
-        System.out.println(lDG.getData().size());
-        System.out.println(lDG.getData().get(4).size());
-
-
-    }
-
     /**
-     * @param map: key = code for data and value is if that is a l/m/h priority
-     * @return Returns an ArrayList of strings with all the countries in order of awesomeness
+     * @param map: key = code for data and value is if that is a l/m/h priority.
+     * @return Returns an ArrayList of strings with all the countries in order of awesomeness.
      */
     public static LegacyDataGrabber findCountry(HashMap<String, Integer> map) {
-
         ArrayList<String> Ids = new ArrayList<String>();
-        String[] idicators = new String[map.size()];
+        String[] indicators = new String[map.size()];
         int indexIndicators = 0;
+
         for (Entry<String, Integer> entry : map.entrySet()) {
 
-            idicators[indexIndicators] = entry.getKey(); // saving for later
+            indicators[indexIndicators] = entry.getKey(); // saving for later
             indexIndicators++;
             Ids.add(entry.getKey());
         }
 
-
         for (String id : Ids) {
-
             ArrayList<CountryValue> temp = new ArrayList<CountryValue>();
             HashMap<String, Float> mp = null;
             try {
                 mp = getIndicatorDataByYear(id, 2012);
-            } catch (IOException e) {
+            } catch (IOException e) { // TODO deal with exceptions
                 e.printStackTrace();
             } catch (SAXException e) {
                 e.printStackTrace();
             } catch (ParserConfigurationException e) {
                 e.printStackTrace();
             }
+
             for (Map.Entry<String, Float> entry : mp.entrySet()) {
                 temp.add(new CountryValue(entry.getKey(), entry.getValue()));
-
-
             }
 
             Collections.sort(temp, new CustomComparator());
 
-
             float score = map.get(id);
+
             for (CountryValue i : temp) {
-
-
                 boolean found = false;
+
                 for (CountryValue cv : MasterScoreKeeper) {
                     if (cv.getName().equals(i.getName())) // just update the score
                     {
                         cv.setScore(score);
                         found = true;
                     }
-
-
                 }
 
                 if (found == false) {
                     MasterScoreKeeper.add(i);
                 }
 
-
                 score /= 1.1;
-
-
             }
-
-
         }
 
         ArrayList<String> places = new ArrayList<String>();
@@ -140,31 +85,25 @@ public class WorldBankData {
         Collections.sort(MasterScoreKeeper, new CustomComparatorScore());
         for (CountryValue cv : MasterScoreKeeper) {
             places.add(cv.getName());
-
-            //System.out.println(cv.getName() + " : " + cv.getScore());
         }
 
         ArrayList<ArrayList<Float[]>> legacyData = new ArrayList<ArrayList<Float[]>>();
+
         for (Entry<String, Integer> entry : map.entrySet()) {
-
             try {
-
-//				legacyData.add(getIndicatorDataByCountry("AR", entry.getKey(),2008,2012));
                 ArrayList<Float[]> tempFloats = new ArrayList<Float[]>();
+
                 for (int k = 2008; k < 2013; ++k) {
                     HashMap<String, Float> data = null;
                     try {
                         data = getIndicatorDataByYear(entry.getKey(), k);
-
-                    } catch (IOException e) // throws IOException, SAXException, ParserConfigurationException
-                    {
+                    } catch (IOException e) { // TODO deal with exceptions
                         e.printStackTrace();
                     } catch (SAXException e) {
                         e.printStackTrace();
                     } catch (ParserConfigurationException e) {
                         e.printStackTrace();
                     }
-
 
                     for (Entry<String, Float> dataEntry : data.entrySet()) {
                         String name = dataEntry.getKey();
@@ -175,19 +114,15 @@ public class WorldBankData {
                 }
 
                 legacyData.add(tempFloats);
-
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
-
         }
 
-
-        return new LegacyDataGrabber(legacyData, MasterScoreKeeper.get(0).getName(), idicators);
-
+        return new LegacyDataGrabber(legacyData, MasterScoreKeeper.get(0).getName(), indicators);
     }
+
     /**
      * Gets indicator data about a country.
      *
@@ -195,8 +130,6 @@ public class WorldBankData {
      * @param indicator The name of a development indicator.
      * @return An ArrayList of [x, y] data points.
      */
-
-
     public static ArrayList<Float[]> getIndicatorDataByCountry(String country, String indicator, int fromYear, int toYear) {
         String XMLString = null;
         try {
