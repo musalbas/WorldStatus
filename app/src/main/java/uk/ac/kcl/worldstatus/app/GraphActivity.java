@@ -11,7 +11,7 @@ import uk.ac.kcl.worldstatus.app.backend.LegacyDataGrabber;
 import java.util.HashMap;
 
 /**
- * Created by Kristin on 22-11-14.
+ * The graph screen.
  */
 public class GraphActivity extends Activity {
     private LegacyDataGrabber data;
