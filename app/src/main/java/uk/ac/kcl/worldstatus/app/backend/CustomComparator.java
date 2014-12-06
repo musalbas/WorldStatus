@@ -9,6 +9,7 @@ public class CustomComparator implements Comparator<CountryValue> {
 
     /**
      * Compare two CountryValues.
+     *
      * @param o1 The first CountryValue.
      * @param o2 The second CountryValue.
      * @return -1 if the first CountryValue is bigger, 1 if the opposite, and 0 if they are both equal.

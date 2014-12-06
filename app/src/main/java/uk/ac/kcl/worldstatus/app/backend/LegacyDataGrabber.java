@@ -4,16 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * @author Harrison Perry
- *         A class that wraps all the data for the country selected based on user input
- *         this class feeds the graphs generated after a user has pressed 'go!'
+ * A class that wraps all the data for the country selected based on user input
+ * this class feeds the graphs generated after a user has pressed 'go!'
  */
 public class LegacyDataGrabber {
 
-    ArrayList<ArrayList<Float[]>> data = null; // five indicators : 5 years worth of data : pairs of year & %
-    String name = null;
-    String[] indicators = null;
+    private ArrayList<ArrayList<Float[]>> data = null; // five indicators : 5 years worth of data : pairs of year & %
+    private String name = null;
+    private String[] indicators = null;
 
+    /**
+     * Initialise the data grabber.
+     *
+     * @param data       A two-dimension ArrayList of indicator data.
+     * @param name       The name of the country.
+     * @param indicators An array of indicators.
+     */
     public LegacyDataGrabber(ArrayList<ArrayList<Float[]>> data, String name, String[] indicators) {
         this.data = data;
         this.name = name;
@@ -21,29 +27,44 @@ public class LegacyDataGrabber {
 
     }
 
-
+    /**
+     * Get the indicator data.
+     *
+     * @return The indicator data.
+     */
     public ArrayList<ArrayList<Float[]>> getData() {
         return data;
     }
 
+    /**
+     * Get the name of the country.
+     *
+     * @return The name of the country.
+     */
     public String getName() {
-
         return name;
     }
 
+    /**
+     * Get the array of indicators.
+     *
+     * @return Array of indicators.
+     */
     public String[] getIndicators() {
-
         return indicators;
     }
 
+    /**
+     * Get the indicator data by year.
+     *
+     * @param year The year.
+     * @return The indicator data.
+     */
     public HashMap getDataByYear(int year) {
         HashMap<String, Float> map = new HashMap<String, Float>();
         int index = 0;
-        for (ArrayList<Float[]> af : data)  // this loops between indicators
-        {
-            System.out.println("Idicator's code: " + indicators[index]);
-            for (Float[] pairs : af) // this loops through years
-            {
+        for (ArrayList<Float[]> af : data) { // this loops between indicators
+            for (Float[] pairs : af) { // this loops through years
                 if (pairs[0] == year) {
                     map.put(getEnglishName(indicators[index]), pairs[1]);
                     System.out.println(pairs[0] + " " + pairs[1]); // prints the year and the data
@@ -56,6 +77,12 @@ public class LegacyDataGrabber {
         return map;
     }
 
+    /**
+     * Get the English name of an indicator.
+     *
+     * @param x The indicator.
+     * @return The English name of the indicator.
+     */
     public String getEnglishName(String x) {
         if (x.equals("SL.UEM.TOTL.ZS")) {
             return "Unemployment";
@@ -76,6 +103,6 @@ public class LegacyDataGrabber {
         } else {
             return "Requested code is not mapped to an indicator.";
         }
-
     }
+
 }
