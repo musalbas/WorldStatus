@@ -10,7 +10,7 @@
 
     <string-array name="options">
 
-        <item>1. High Umemployment</item>
+        <item>1. High Unemployment</item>
         <item>2. High Urban population</item>
         <item>3. High Tax rate</item>
         <item>4. High Forest area</item>
