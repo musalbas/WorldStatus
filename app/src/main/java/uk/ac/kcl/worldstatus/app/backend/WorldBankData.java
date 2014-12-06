@@ -34,16 +34,18 @@ public class WorldBankData {
         int indexIndicators = 0;
 
         for (Entry<String, Integer> entry : map.entrySet()) {
-
             indicators[indexIndicators] = entry.getKey(); // saving for later
             indexIndicators++;
             Ids.add(entry.getKey());
         }
 
+        HashMap<String, HashMap<String, Float>> mps = new HashMap<String, HashMap<String, Float>>();
+
         for (String id : Ids) {
             ArrayList<CountryValue> temp = new ArrayList<CountryValue>();
             HashMap<String, Float> mp = null;
             mp = getIndicatorDataByYear(id, 2012);
+            mps.put(id, mp);
 
             for (Map.Entry<String, Float> entry : mp.entrySet()) {
                 temp.add(new CountryValue(entry.getKey(), entry.getValue()));
@@ -86,7 +88,8 @@ public class WorldBankData {
 
             for (int k = 2012; k < 2013; ++k) {
                 HashMap<String, Float> data = null;
-                data = getIndicatorDataByYear(entry.getKey(), k);
+                //data = getIndicatorDataByYear(entry.getKey(), k);
+                data = mps.get(entry.getKey());
 
                 for (Entry<String, Float> dataEntry : data.entrySet()) {
                     String name = dataEntry.getKey();
