@@ -1,9 +1,10 @@
 package uk.ac.kcl.worldstatus.app;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -115,16 +116,23 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         HashMap<String, Integer> indicators = new HashMap<String, Integer>();
 
         for (int i = 0; i < 5; i++) {
-            if(pairerArray[i].isVisible()){
+            if (pairerArray[i].isVisible()) {
                 if (validateIndicators(pairerArray[i])) {
                     indicators.put(getMetaCode(pairerArray[i].getScenario()), pairerArray[i].getImportance() + 1);
-                }
-                else{
-                    Log.d("ERROR", "INVALID INDICATORS");
+                } else {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Invalid choice")
+                            .setMessage("You must select different indicators.")
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    return;
                 }
             }
         }
-        //TODO don't allow to proceed to next activity if wrong indicators
         ParcelableMap parcelableIndicators = new ParcelableMap(indicators);
 
         Intent intent = new Intent(MainActivity.this, GraphActivity.class);
