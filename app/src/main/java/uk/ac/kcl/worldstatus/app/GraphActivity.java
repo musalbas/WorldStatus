@@ -62,7 +62,7 @@ public class GraphActivity extends Activity {
             int year = graphData.getYear();
             HashMap<String, Float> indicatorDataMap = graphData.getIndicatorDataMap();
 
-            BarChart line = new BarChart();
+            BarChart line = new BarChart(graphData);
             GraphicalView lineView = line.getView(GraphActivity.this);
             FrameLayout frameLayout = (FrameLayout) findViewById(R.id.chart);
             frameLayout.addView(lineView);
