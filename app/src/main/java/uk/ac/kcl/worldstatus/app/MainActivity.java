@@ -1,6 +1,7 @@
 package uk.ac.kcl.worldstatus.app;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,11 +15,26 @@ import android.widget.*;
 import java.io.Serializable;
 import java.util.HashMap;
 
+/**
+ * The Main Activity which represents the first thing the user sees when they run the app. It contains the core features for selecting the user's preferences before proceeding to look for a country.
+ *
+ * @author Team 2-L
+ * @see android.app.Activity
+ * @see android.support.v7.app.ActionBarActivity
+ */
 public class MainActivity extends ActionBarActivity implements Serializable {
     private Pairer paierer1, pairer2, pairer3, pairer4, pairer5;
 
     private Pairer[] pairerArray;
+    HashMap<String, Integer> indicators;
 
+    /**
+     * The method to be executed when the Main Activity starts. Additionally where each indicator's components are paired together to allow for further functionality.
+     *
+     * @param savedInstanceState
+     * @see uk.ac.kcl.worldstatus.app.Pairer
+     * @see android.support.v7.app.ActionBarActivity onCreate
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,14 +53,29 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         pairer5.setColor(253, 245, 230);
 
         pairerArray = new Pairer[]{paierer1, pairer2, pairer3, pairer4, pairer5};
+
+        indicators = new HashMap<String, Integer>();
     }
 
-
+    /**
+     * The method invoked when the Menu is created.
+     *
+     * @param menu the menu created
+     * @return true if the menu has been successfully created; false otherwise
+     * @see android.view.Menu
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    /**
+     * The method invoked when an item in the Menu has been selected.
+     *
+     * @param item the MenuItem item selected
+     * @return true after the defined functionality has executed successfully; false otherwise
+     * @see android.view.MenuItem
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -62,11 +93,24 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * TODO
+     *
+     * @return
+     */
     @Override
     public android.support.v4.app.FragmentManager getSupportFragmentManager() {
         return null;
     }
 
+    /**
+     * Checks if the selected indicator has not already been selected in any of the other Spinners.
+     *
+     * @param p the Paier object containing the indicator reference
+     * @return true if the indicator has been selected only once; false otherwise;
+     * @see uk.ac.kcl.worldstatus.app.Pairer
+     * @see android.widget.Spinner
+     */
     public boolean validateIndicators(Pairer p) {
         int counter = 0;
         for (int i = 0; i < 5; i++) {
@@ -80,6 +124,52 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         return true;
     }
 
+    /**
+     * Determines whether the user is allowed to proceed to the next activity after having validated whether there is
+     * a valid choice of indicators.
+     *
+     * @return true if validation succeeds; false otherwise
+     */
+    public boolean allowRun() {
+        int counter = 0;
+        for (int i = 0; i < 5; i++) {
+            if (pairerArray[i].isEnabled()) {
+                if (validateIndicators(pairerArray[i])) {
+                    indicators.put(getMetaCode(pairerArray[i].getScenario()), pairerArray[i].getImportance() + 1);
+
+                } else {
+                    new AlertDialog.Builder(this).setTitle("Invalid choice")
+                            .setMessage("You must select different indicators.")
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            }).setIcon(android.R.drawable.ic_dialog_alert).show();
+                    return false;
+                }
+            } else {
+                counter++;
+                if (counter == 5) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Please select at least one indicator.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Gets the code for the specified indicator required to query the API.
+     *
+     * @param s the indicator name
+     * @return the indicator code for the WorldBank API
+     * @see uk.ac.kcl.worldstatus.app.backend.WorldBankData
+     */
     public String getMetaCode(String s) {
         String toReturn = "";
         char w = s.charAt(0);
@@ -113,36 +203,35 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         return toReturn;
     }
 
+    /**
+     * Starts the {@link uk.ac.kcl.worldstatus.app.GraphActivity}. Before proceeding to the next activity,
+     * checks if there is a valid selection of all the indicators. If yes, proceeds to send a
+     * {@link uk.ac.kcl.worldstatus.app.ParcelableMap} object containing a {@link java.util.HashMap} with the selected
+     * indicators.
+     *
+     * @param v the View that invoked the method
+     */
     public void graphHandler(View v) {
 
-        HashMap<String, Integer> indicators = new HashMap<String, Integer>();
+        if (allowRun()) {
 
-        for (int i = 0; i < 5; i++) {
-            if (pairerArray[i].isEnabled()) {
-                if (validateIndicators(pairerArray[i])) {
-                    indicators.put(getMetaCode(pairerArray[i].getScenario()), pairerArray[i].getImportance() + 1);
-                } else {
-                    new AlertDialog.Builder(this)
-                            .setTitle("Invalid choice")
-                            .setMessage("You must select different indicators.")
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                    return;
-                }
-            }
+            ParcelableMap parcelableIndicators = new ParcelableMap(indicators);
+
+            Intent intent = new Intent(MainActivity.this, GraphActivity.class);
+            intent.putExtra("indicators", parcelableIndicators);
+            startActivity(intent);
         }
-
-        ParcelableMap parcelableIndicators = new ParcelableMap(indicators);
-
-        Intent intent = new Intent(MainActivity.this, GraphActivity.class);
-        intent.putExtra("indicators", parcelableIndicators);
-        startActivity(intent);
     }
 
+    /**
+     * A method for listening to button presses. Returns true if follows the default functionality.
+     *
+     * @param keyCode the keyCode for the pressed button
+     * @param event   the type of KeyEvent
+     * @return false if pressed during the Instructions screen.
+     * @see android.view.KeyEvent
+     * @see android.view.KeyEvent onKeyDown
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
