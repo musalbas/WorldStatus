@@ -32,6 +32,8 @@ public class Utils {
         String buffer;
         while ((buffer = dataInputStream.readLine()) != null) {
             if (cancelled) {
+                dataInputStream.close();
+                inputStream.close();
                 cancelled = false;
                 return null;
             }
