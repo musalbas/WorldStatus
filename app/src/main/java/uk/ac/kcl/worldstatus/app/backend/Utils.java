@@ -15,6 +15,8 @@ import java.net.URL;
  */
 public class Utils {
 
+    private static boolean cancelled = true;
+
     /**
      * Gets data from an URL.
      *
@@ -29,6 +31,10 @@ public class Utils {
         String data = "";
         String buffer;
         while ((buffer = dataInputStream.readLine()) != null) {
+            if (cancelled) {
+                cancelled = false;
+                return null;
+            }
             data += buffer;
         }
 
@@ -48,6 +54,13 @@ public class Utils {
         Document document = dBuilder.parse(inputSource);
 
         return document;
+    }
+
+    /**
+     * Cancel current task once.
+     */
+    public static void cancel() {
+        cancelled = true;
     }
 
 }

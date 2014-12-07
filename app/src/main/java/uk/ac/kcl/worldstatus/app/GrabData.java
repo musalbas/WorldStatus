@@ -2,6 +2,7 @@ package uk.ac.kcl.worldstatus.app;
 
 import android.os.AsyncTask;
 import uk.ac.kcl.worldstatus.app.backend.LegacyDataGrabber;
+import uk.ac.kcl.worldstatus.app.backend.Utils;
 import uk.ac.kcl.worldstatus.app.backend.WorldBankData;
 
 import java.util.HashMap;
@@ -23,6 +24,11 @@ public class GrabData extends AsyncTask<HashMap<String, Integer>, Void, GraphDat
         GraphData graphData = new GraphData(data);
 
         return graphData;
+    }
+
+    @Override
+    protected void onCancelled() {
+        Utils.cancel();
     }
 
     protected void onPostExecute(GraphData graphData) {
