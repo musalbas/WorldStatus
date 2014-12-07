@@ -88,7 +88,7 @@ public class GraphActivity extends Activity {
 
     public void fetchData(View v) {
         setContentView(R.layout.loading_layout);
-        if (grabDataGraph.isCancelled()) {
+        if (grabDataGraph == null || grabDataGraph.isCancelled()) {
             grabDataGraph = new GrabDataGraph();
             grabDataGraph.execute(indicators);
         } else {
