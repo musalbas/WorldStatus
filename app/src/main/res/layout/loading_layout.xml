@@ -8,12 +8,12 @@
 
     <TextView
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Loading... Please wait"
+            android:text="Loading and comparing data from the World Bank. Please wait..."
             android:id="@+id/textView" android:layout_gravity="center"
             android:gravity="center"
-            android:layout_weight="2"/>
+            android:layout_weight="2" android:layout_marginRight="30dp" android:layout_marginLeft="30dp"/>
     <ProgressBar
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
