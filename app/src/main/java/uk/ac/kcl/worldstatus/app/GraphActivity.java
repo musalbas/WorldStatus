@@ -2,12 +2,13 @@ package uk.ac.kcl.worldstatus.app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import org.achartengine.GraphicalView;
-import uk.ac.kcl.worldstatus.app.backend.LegacyDataGrabber;
 
 import java.util.HashMap;
 
@@ -15,8 +16,8 @@ import java.util.HashMap;
  * The graph screen.
  */
 public class GraphActivity extends Activity {
-    private LegacyDataGrabber data;
-
+    private GrabDataGraph grabDataGraph;
+    HashMap<String, Integer> indicators;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +25,9 @@ public class GraphActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
         ParcelableMap pMap = extras.getParcelable("indicators");
-        HashMap<String, Integer> indicators = pMap.getIndicatorDataMap();
+        indicators = pMap.getIndicatorDataMap();
 
-        GrabDataGraph grabDataGraph = new GrabDataGraph();
+        grabDataGraph = new GrabDataGraph();
         grabDataGraph.execute(indicators);
     }
 
@@ -59,7 +60,8 @@ public class GraphActivity extends Activity {
         @Override
         public void onPostExecute(GraphData graphData) {
             if (graphData == null) {
-                //TODO call error layout
+                grabDataGraph.cancel(true);
+                setContentView(R.layout.error_layout);
             } else {
                 BarChart line = new BarChart(graphData);
                 GraphicalView graphView = line.getView(GraphActivity.this);
@@ -73,4 +75,24 @@ public class GraphActivity extends Activity {
             }
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            Log.w("TEST", "TESTING");
+            grabDataGraph.cancel(true);
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /*public void fetchData(View v) {
+        //if(grabDataGraph.isCancelled()) {
+            setContentView(R.layout.loading_layout);
+            grabDataGraph = new GrabDataGraph();
+            grabDataGraph.execute(indicators);
+        //} else {
+        //    Log.d("FAIL", "FAILED.");
+        //}
+    }*/
 }

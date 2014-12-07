@@ -21,8 +21,8 @@ public class GrabData extends AsyncTask<HashMap<String, Integer>, Void, GraphDat
         } catch (Exception e) {
             return null;
         }
-        GraphData graphData = new GraphData(data);
 
+        GraphData graphData = new GraphData(data);
         return graphData;
     }
 
