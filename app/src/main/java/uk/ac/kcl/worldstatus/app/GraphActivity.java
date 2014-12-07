@@ -2,10 +2,10 @@ package uk.ac.kcl.worldstatus.app;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import org.achartengine.GraphicalView;
@@ -79,20 +79,20 @@ public class GraphActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            Log.w("TEST", "TESTING");
             grabDataGraph.doCancel();
+            grabDataGraph.cancel(true);
         }
 
         return super.onKeyDown(keyCode, event);
     }
 
-    /*public void fetchData(View v) {
-        //if(grabDataGraph.isCancelled()) {
-            setContentView(R.layout.loading_layout);
+    public void fetchData(View v) {
+        setContentView(R.layout.loading_layout);
+        if (grabDataGraph.isCancelled()) {
             grabDataGraph = new GrabDataGraph();
             grabDataGraph.execute(indicators);
-        //} else {
-        //    Log.d("FAIL", "FAILED.");
-        //}
-    }*/
+        } else {
+            setContentView(R.layout.error_layout);
+        }
+    }
 }
