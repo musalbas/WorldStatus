@@ -11,7 +11,6 @@ import java.util.HashMap;
  * Class to asynchronously grab data from the World Bank API.
  */
 public class GrabData extends AsyncTask<HashMap<String, Integer>, Void, GraphData> {
-
     @Override
     protected GraphData doInBackground(HashMap<String, Integer>... maps) {
         HashMap<String, Integer> map = maps[0];
