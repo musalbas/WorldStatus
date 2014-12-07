@@ -34,7 +34,18 @@ public class GraphActivity extends Activity {
         return null;
     }
 
+    /**
+     * An extension of the {@link uk.ac.kcl.worldstatus.app.GrabData} class. Used to override the <code>onPostExecute</code>
+     * method.
+     */
     public class GrabDataGraph extends GrabData {
+
+        /**
+         * Handle the resulting data by creating a {@link uk.ac.kcl.worldstatus.app.BarChart} to be displayed on the
+         * user's screen.
+         *
+         * @param graphData The graph data to display.
+         */
         @Override
         public void onPostExecute(GraphData graphData) {
             if (graphData == null) {
@@ -54,6 +65,15 @@ public class GraphActivity extends Activity {
         }
     }
 
+    /**
+     * Listens for key presses. Cancels the current request to fetch data if pressed whilst on the loading screen.
+     *
+     * @param keyCode the keyCode for the pressed key
+     * @param event the type of KeyEvent occurred
+     * @return the default behaviour for the pressed key
+     *
+     * @see android.view.KeyEvent
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
@@ -64,6 +84,10 @@ public class GraphActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * Attempts to fetch the data for the previously selected indicator if the first request failed.
+     * @param v the View that invoked the method
+     */
     public void fetchData(View v) {
         setContentView(R.layout.loading_layout);
         if (grabDataGraph == null || grabDataGraph.isCancelled()) {
