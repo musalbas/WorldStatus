@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:orientation="vertical"
-        >
+              android:orientation="vertical">
 
     <ScrollView
             android:layout_width="fill_parent"
@@ -22,7 +23,7 @@
                     android:id="@+id/welcome"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Welcome to the Country Finder"
+                    android:text="Select the indicators that are important for you."
                     android:gravity="center"/>
 
             <LinearLayout
@@ -33,14 +34,14 @@
                 <LinearLayout
                         android:id="@+id/ll1"
                         android:layout_width="fill_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical"
                         android:paddingTop="20dp"
-                        android:paddingBottom="20dp"><!--android:background="@drawables/layout_border"-->
+                        android:paddingBottom="20dp">
 
                     <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="horizontal"
                             android:weightSum="18">
 
@@ -83,7 +84,7 @@
 
                     <FrameLayout
                             android:layout_width="fill_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="vertical" android:layout_marginTop="10dp">
 
                         <Spinner
@@ -99,12 +100,12 @@
                 <LinearLayout
                         android:id="@+id/ll2"
                         android:layout_width="fill_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
 
                     <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="horizontal"
                             android:weightSum="18">
 
@@ -147,7 +148,7 @@
 
                     <FrameLayout
                             android:layout_width="fill_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="vertical" android:layout_marginTop="10dp">
 
                         <Spinner
@@ -163,12 +164,12 @@
                 <LinearLayout
                         android:id="@+id/ll3"
                         android:layout_width="fill_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
 
                     <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="horizontal"
                             android:weightSum="18">
 
@@ -211,7 +212,7 @@
 
                     <FrameLayout
                             android:layout_width="fill_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="vertical" android:layout_marginTop="10dp">
 
                         <Spinner
@@ -228,12 +229,12 @@
                 <LinearLayout
                         android:id="@+id/ll4"
                         android:layout_width="fill_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
 
                     <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="horizontal"
                             android:weightSum="18">
 
@@ -276,7 +277,7 @@
 
                     <FrameLayout
                             android:layout_width="fill_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="vertical" android:layout_marginTop="10dp">
 
                         <Spinner
@@ -292,12 +293,12 @@
                 <LinearLayout
                         android:id="@+id/ll5"
                         android:layout_width="fill_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
 
                     <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="horizontal"
                             android:weightSum="18">
 
@@ -340,7 +341,7 @@
 
                     <FrameLayout
                             android:layout_width="fill_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:orientation="vertical" android:layout_marginTop="10dp">
 
                         <Spinner

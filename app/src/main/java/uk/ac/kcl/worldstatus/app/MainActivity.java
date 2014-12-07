@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class MainActivity extends ActionBarActivity implements Serializable {
-    private Pairer test1, test2, test3, test4, test5;
+    private Pairer paierer1, pairer2, pairer3, pairer4, pairer5;
 
     private Pairer[] pairerArray;
 
@@ -23,19 +23,19 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        test1 = new Pairer(1, (SeekBar) findViewById(R.id.sb1), (TextView) findViewById(R.id.tv1), (Spinner) findViewById(R.id.sp1), (LinearLayout) findViewById(R.id.ll1), (Button) findViewById(R.id.button1));
-        test2 = new Pairer(2, (SeekBar) findViewById(R.id.sb2), (TextView) findViewById(R.id.tv2), (Spinner) findViewById(R.id.sp2), (LinearLayout) findViewById(R.id.ll2), (Button) findViewById(R.id.button2));
-        test3 = new Pairer(3, (SeekBar) findViewById(R.id.sb3), (TextView) findViewById(R.id.tv3), (Spinner) findViewById(R.id.sp3), (LinearLayout) findViewById(R.id.ll3), (Button) findViewById(R.id.button3));
-        test4 = new Pairer(4, (SeekBar) findViewById(R.id.sb4), (TextView) findViewById(R.id.tv4), (Spinner) findViewById(R.id.sp4), (LinearLayout) findViewById(R.id.ll4), (Button) findViewById(R.id.button4));
-        test5 = new Pairer(5, (SeekBar) findViewById(R.id.sb5), (TextView) findViewById(R.id.tv5), (Spinner) findViewById(R.id.sp5), (LinearLayout) findViewById(R.id.ll5), (Button) findViewById(R.id.button5));
+        paierer1 = new Pairer(1, (SeekBar) findViewById(R.id.sb1), (TextView) findViewById(R.id.tv1), (Spinner) findViewById(R.id.sp1), (LinearLayout) findViewById(R.id.ll1), (Button) findViewById(R.id.button1));
+        pairer2 = new Pairer(2, (SeekBar) findViewById(R.id.sb2), (TextView) findViewById(R.id.tv2), (Spinner) findViewById(R.id.sp2), (LinearLayout) findViewById(R.id.ll2), (Button) findViewById(R.id.button2));
+        pairer3 = new Pairer(3, (SeekBar) findViewById(R.id.sb3), (TextView) findViewById(R.id.tv3), (Spinner) findViewById(R.id.sp3), (LinearLayout) findViewById(R.id.ll3), (Button) findViewById(R.id.button3));
+        pairer4 = new Pairer(4, (SeekBar) findViewById(R.id.sb4), (TextView) findViewById(R.id.tv4), (Spinner) findViewById(R.id.sp4), (LinearLayout) findViewById(R.id.ll4), (Button) findViewById(R.id.button4));
+        pairer5 = new Pairer(5, (SeekBar) findViewById(R.id.sb5), (TextView) findViewById(R.id.tv5), (Spinner) findViewById(R.id.sp5), (LinearLayout) findViewById(R.id.ll5), (Button) findViewById(R.id.button5));
 
-        test1.setColor(253, 245, 230);
-        test2.setColor(234, 234, 234);
-        test3.setColor(253, 245, 230);
-        test4.setColor(234, 234, 234);
-        test5.setColor(253, 245, 230);
+        paierer1.setColor(253, 245, 230);
+        pairer2.setColor(253, 245, 230);
+        pairer3.setColor(253, 245, 230);
+        pairer4.setColor(253, 245, 230);
+        pairer5.setColor(253, 245, 230);
 
-        pairerArray = new Pairer[]{test1, test2, test3, test4, test5};
+        pairerArray = new Pairer[]{paierer1, pairer2, pairer3, pairer4, pairer5};
     }
 
 
