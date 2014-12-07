@@ -15,7 +15,7 @@ import java.net.URL;
  */
 public class Utils {
 
-    private static boolean cancelled = true;
+    private static boolean cancelled = false;
 
     /**
      * Gets data from an URL.
