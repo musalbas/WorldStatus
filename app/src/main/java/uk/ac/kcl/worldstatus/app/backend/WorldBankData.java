@@ -1,5 +1,6 @@
 package uk.ac.kcl.worldstatus.app.backend;
 
+import android.util.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -44,6 +45,7 @@ public class WorldBankData {
         for (String id : Ids) {
             ArrayList<CountryValue> temp = new ArrayList<CountryValue>();
             HashMap<String, Float> mp = null;
+            Log.v("Downloading data", id);
             mp = getIndicatorDataByYear(id, 2012);
             mps.put(id, mp);
 

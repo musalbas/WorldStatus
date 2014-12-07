@@ -26,8 +26,7 @@ public class GrabData extends AsyncTask<HashMap<String, Integer>, Void, GraphDat
         return graphData;
     }
 
-    @Override
-    protected void onCancelled() {
+    protected void doCancel() {
         Utils.cancel();
     }
 

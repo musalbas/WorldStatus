@@ -80,7 +80,7 @@ public class GraphActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             Log.w("TEST", "TESTING");
-            grabDataGraph.cancel(true);
+            grabDataGraph.doCancel();
         }
 
         return super.onKeyDown(keyCode, event);
