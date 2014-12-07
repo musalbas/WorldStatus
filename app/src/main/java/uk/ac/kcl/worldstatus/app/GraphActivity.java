@@ -3,8 +3,6 @@ package uk.ac.kcl.worldstatus.app;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -18,6 +16,7 @@ import java.util.HashMap;
 public class GraphActivity extends Activity {
     private GrabDataGraph grabDataGraph;
     HashMap<String, Integer> indicators;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,27 +28,6 @@ public class GraphActivity extends Activity {
 
         grabDataGraph = new GrabDataGraph();
         grabDataGraph.execute(indicators);
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public android.support.v4.app.FragmentManager getSupportFragmentManager() {

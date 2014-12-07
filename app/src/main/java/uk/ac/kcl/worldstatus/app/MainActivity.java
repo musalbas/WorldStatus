@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,21 +41,22 @@ public class MainActivity extends ActionBarActivity implements Serializable {
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.main);
+        LinearLayout instructionsLayout = (LinearLayout) findViewById(R.id.instructions);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.instructions) {
+            if (mainLayout.getVisibility() == View.VISIBLE) {
+                mainLayout.setVisibility(View.GONE);
+                instructionsLayout.setVisibility(View.VISIBLE);
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -140,5 +142,23 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         intent.putExtra("indicators", parcelableIndicators);
         startActivity(intent);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            LinearLayout mainLayout = (LinearLayout) findViewById(R.id.main);
+            LinearLayout instructionsLayout = (LinearLayout) findViewById(R.id.instructions);
+            if (instructionsLayout.getVisibility() == View.VISIBLE) {
+                instructionsLayout.setVisibility(View.GONE);
+                mainLayout.setVisibility(View.VISIBLE);
+                return false;
+            } /*else {
+                return super.onKeyDown(keyCode, event);
+            }*/
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
 
 }

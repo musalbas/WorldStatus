@@ -5,371 +5,393 @@
               android:layout_height="fill_parent"
               android:orientation="vertical">
 
-    <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollView"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/main" android:focusableInTouchMode="true"
             >
-        <LinearLayout
-                android:orientation="vertical"
+        <ScrollView
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginRight="10dp"
-                >
-            <TextView
-                    android:id="@+id/welcome"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Select the indicators that are important for you."
-                    android:gravity="center"/>
-
+                android:layout_height="wrap_content"
+                android:id="@+id/scrollView"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp">
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" android:layout_marginTop="30dp" android:layout_marginBottom="30dp">
-
-                <LinearLayout
-                        android:id="@+id/ll1"
-                        android:layout_width="fill_parent"
-                        android:layout_height="120dp"
-                        android:orientation="vertical"
-                        android:paddingTop="20dp"
-                        android:paddingBottom="20dp">
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:orientation="horizontal"
-                            android:weightSum="18">
-
-                        <TextView
-                                android:id="@+id/tv1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="7"
-                                android:gravity="center"
-                                android:padding="5dp"
-                                android:text="Low"/>
-
-                        <SeekBar
-                                android:id="@+id/sb1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="8"
-                                android:gravity="center"
-                                android:max="2"/>
-
-                        <FrameLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:layout_marginLeft="5dp">
-                            <Button
-                                    android:id="@+id/button1"
-                                    android:layout_width="35dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:text="X"
-                                    android:textSize="10dp"
-                                    />
-                        </FrameLayout>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="40dp"
-                            android:orientation="vertical" android:layout_marginTop="10dp">
-
-                        <Spinner
-                                android:id="@+id/sp1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:entries="@array/options"
-                                android:prompt="@string/optionPrompt"
-                                android:layout_gravity="center"
-                                android:gravity="center"/>
-                    </FrameLayout>
-                </LinearLayout>
-                <LinearLayout
-                        android:id="@+id/ll2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="120dp"
-                        android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:orientation="horizontal"
-                            android:weightSum="18">
-
-                        <TextView
-                                android:id="@+id/tv2"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="7"
-                                android:gravity="center"
-                                android:padding="5dp"
-                                android:text="Low"/>
-
-                        <SeekBar
-                                android:id="@+id/sb2"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="8"
-                                android:gravity="center"
-                                android:max="2"/>
-
-                        <FrameLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:layout_marginLeft="5dp">
-                            <Button
-                                    android:id="@+id/button2"
-                                    android:layout_width="35dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:text="X"
-                                    android:textSize="10dp"
-                                    />
-                        </FrameLayout>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="40dp"
-                            android:orientation="vertical" android:layout_marginTop="10dp">
-
-                        <Spinner
-                                android:id="@+id/sp2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:entries="@array/options"
-                                android:prompt="@string/optionPrompt"
-                                android:layout_gravity="center"
-                                android:gravity="center"/>
-                    </FrameLayout>
-                </LinearLayout>
-                <LinearLayout
-                        android:id="@+id/ll3"
-                        android:layout_width="fill_parent"
-                        android:layout_height="120dp"
-                        android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:orientation="horizontal"
-                            android:weightSum="18">
-
-                        <TextView
-                                android:id="@+id/tv3"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="7"
-                                android:gravity="center"
-                                android:padding="5dp"
-                                android:text="Low"/>
-
-                        <SeekBar
-                                android:id="@+id/sb3"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="8"
-                                android:gravity="center"
-                                android:max="2"/>
-
-                        <FrameLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:layout_marginLeft="5dp">
-                            <Button
-                                    android:id="@+id/button3"
-                                    android:layout_width="35dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:text="X"
-                                    android:textSize="10dp"
-                                    />
-                        </FrameLayout>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="40dp"
-                            android:orientation="vertical" android:layout_marginTop="10dp">
-
-                        <Spinner
-                                android:id="@+id/sp3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:entries="@array/options"
-                                android:prompt="@string/optionPrompt"
-                                android:layout_gravity="center"
-                                android:gravity="center"/>
-                    </FrameLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                        android:id="@+id/ll4"
-                        android:layout_width="fill_parent"
-                        android:layout_height="120dp"
-                        android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:orientation="horizontal"
-                            android:weightSum="18">
-
-                        <TextView
-                                android:id="@+id/tv4"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="7"
-                                android:gravity="center"
-                                android:padding="5dp"
-                                android:text="Low"/>
-
-                        <SeekBar
-                                android:id="@+id/sb4"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="8"
-                                android:gravity="center"
-                                android:max="2"/>
-
-                        <FrameLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:layout_marginLeft="5dp">
-                            <Button
-                                    android:id="@+id/button4"
-                                    android:layout_width="35dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:text="X"
-                                    android:textSize="10dp"
-                                    />
-                        </FrameLayout>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="40dp"
-                            android:orientation="vertical" android:layout_marginTop="10dp">
-
-                        <Spinner
-                                android:id="@+id/sp4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:entries="@array/options"
-                                android:prompt="@string/optionPrompt"
-                                android:layout_gravity="center"
-                                android:gravity="center"/>
-                    </FrameLayout>
-                </LinearLayout>
-                <LinearLayout
-                        android:id="@+id/ll5"
-                        android:layout_width="fill_parent"
-                        android:layout_height="120dp"
-                        android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:orientation="horizontal"
-                            android:weightSum="18">
-
-                        <TextView
-                                android:id="@+id/tv5"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="7"
-                                android:gravity="center"
-                                android:padding="5dp"
-                                android:text="Low"/>
-
-                        <SeekBar
-                                android:id="@+id/sb5"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="8"
-                                android:gravity="center"
-                                android:max="2"/>
-
-                        <FrameLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:layout_marginLeft="5dp">
-                            <Button
-                                    android:id="@+id/button5"
-                                    android:layout_width="35dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:text="X"
-                                    android:textSize="10dp"
-                                    />
-                        </FrameLayout>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="40dp"
-                            android:orientation="vertical" android:layout_marginTop="10dp">
-
-                        <Spinner
-                                android:id="@+id/sp5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:entries="@array/options"
-                                android:prompt="@string/optionPrompt"
-                                android:layout_gravity="center"
-                                android:gravity="center"/>
-                    </FrameLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                    android:id="@+id/ll6"
+                    android:orientation="vertical"
                     android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal">
-
-                <Button
-                        android:id="@+id/lineGraphBtn"
-                        style="?android:attr/buttonStyleSmall"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="10dp"
+                    >
+                <TextView
+                        android:id="@+id/welcome"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:onClick="graphHandler"
-                        android:text="@string/submitMessage"/>
+                        android:layout_height="wrap_content"
+                        android:text="Select the indicators that are important for you."
+                        android:gravity="center"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp">
+
+                    <LinearLayout
+                            android:id="@+id/ll1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="120dp"
+                            android:orientation="vertical"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="20dp">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:weightSum="18">
+
+                            <TextView
+                                    android:id="@+id/tv1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="7"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Low"/>
+
+                            <SeekBar
+                                    android:id="@+id/sb1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="8"
+                                    android:gravity="center"
+                                    android:max="2"/>
+
+                            <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:layout_marginLeft="5dp">
+                                <Button
+                                        android:id="@+id/button1"
+                                        android:layout_width="35dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:text="X"
+                                        android:textSize="10dp"
+                                        />
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="40dp"
+                                android:orientation="vertical" android:layout_marginTop="10dp">
+
+                            <Spinner
+                                    android:id="@+id/sp1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:entries="@array/options"
+                                    android:prompt="@string/optionPrompt"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"/>
+                        </FrameLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:id="@+id/ll2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="120dp"
+                            android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:weightSum="18">
+
+                            <TextView
+                                    android:id="@+id/tv2"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="7"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Low"/>
+
+                            <SeekBar
+                                    android:id="@+id/sb2"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="8"
+                                    android:gravity="center"
+                                    android:max="2"/>
+
+                            <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:layout_marginLeft="5dp">
+                                <Button
+                                        android:id="@+id/button2"
+                                        android:layout_width="35dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:text="X"
+                                        android:textSize="10dp"
+                                        />
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="40dp"
+                                android:orientation="vertical" android:layout_marginTop="10dp">
+
+                            <Spinner
+                                    android:id="@+id/sp2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:entries="@array/options"
+                                    android:prompt="@string/optionPrompt"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"/>
+                        </FrameLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:id="@+id/ll3"
+                            android:layout_width="fill_parent"
+                            android:layout_height="120dp"
+                            android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:weightSum="18">
+
+                            <TextView
+                                    android:id="@+id/tv3"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="7"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Low"/>
+
+                            <SeekBar
+                                    android:id="@+id/sb3"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="8"
+                                    android:gravity="center"
+                                    android:max="2"/>
+
+                            <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:layout_marginLeft="5dp">
+                                <Button
+                                        android:id="@+id/button3"
+                                        android:layout_width="35dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:text="X"
+                                        android:textSize="10dp"
+                                        />
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="40dp"
+                                android:orientation="vertical" android:layout_marginTop="10dp">
+
+                            <Spinner
+                                    android:id="@+id/sp3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:entries="@array/options"
+                                    android:prompt="@string/optionPrompt"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"/>
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/ll4"
+                            android:layout_width="fill_parent"
+                            android:layout_height="120dp"
+                            android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:weightSum="18">
+
+                            <TextView
+                                    android:id="@+id/tv4"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="7"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Low"/>
+
+                            <SeekBar
+                                    android:id="@+id/sb4"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="8"
+                                    android:gravity="center"
+                                    android:max="2"/>
+
+                            <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:layout_marginLeft="5dp">
+                                <Button
+                                        android:id="@+id/button4"
+                                        android:layout_width="35dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:text="X"
+                                        android:textSize="10dp"
+                                        />
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="40dp"
+                                android:orientation="vertical" android:layout_marginTop="10dp">
+
+                            <Spinner
+                                    android:id="@+id/sp4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:entries="@array/options"
+                                    android:prompt="@string/optionPrompt"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"/>
+                        </FrameLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:id="@+id/ll5"
+                            android:layout_width="fill_parent"
+                            android:layout_height="120dp"
+                            android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:weightSum="18">
+
+                            <TextView
+                                    android:id="@+id/tv5"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="7"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Low"/>
+
+                            <SeekBar
+                                    android:id="@+id/sb5"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="8"
+                                    android:gravity="center"
+                                    android:max="2"/>
+
+                            <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:layout_marginLeft="5dp">
+                                <Button
+                                        android:id="@+id/button5"
+                                        android:layout_width="35dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:text="X"
+                                        android:textSize="10dp"
+                                        />
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="40dp"
+                                android:orientation="vertical" android:layout_marginTop="10dp">
+
+                            <Spinner
+                                    android:id="@+id/sp5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:entries="@array/options"
+                                    android:prompt="@string/optionPrompt"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"/>
+                        </FrameLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                        android:id="@+id/ll6"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                    <Button
+                            android:id="@+id/lineGraphBtn"
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:onClick="graphHandler"
+                            android:text="@string/submitMessage"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+        <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:alpha="0">
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/instructions" android:visibility="gone">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome to 'Where To Go?'! Our app lets you select a few features that are important to you when looking for a country you'd like to visit. It will then automatically find a country that best matches your preferences and show you the latest data for the features you selected. Start by selecting the relevant feature (indicator) from the dropdown menu and define how important it is to you (Low, Medium, High) by using the slider. Note that you can at most have five indicators active. If you would like to have less than five, you can click on the X button on the right of every indicator which will exclude it from your preferences."
+                android:id="@+id/textView"
+                android:gravity="center" android:layout_marginLeft="30dp" android:layout_marginRight="30dp"
+                android:layout_marginTop="50dp"/>
+    </LinearLayout>
 </LinearLayout>
