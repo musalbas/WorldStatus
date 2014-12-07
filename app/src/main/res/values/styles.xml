@@ -2,6 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
+        <!--<style name="AppTheme" parent="@android:Theme.Holo.Light">-->
         <!-- Customize your theme here. -->
     </style>
 

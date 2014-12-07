@@ -23,11 +23,11 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        test1 = new Pairer((SeekBar) findViewById(R.id.sb1), (TextView) findViewById(R.id.tv1), (Spinner) findViewById(R.id.sp1), (LinearLayout) findViewById(R.id.ll1), (Button) findViewById(R.id.button1));
-        test2 = new Pairer((SeekBar) findViewById(R.id.sb2), (TextView) findViewById(R.id.tv2), (Spinner) findViewById(R.id.sp2), (LinearLayout) findViewById(R.id.ll2), (Button) findViewById(R.id.button2));
-        test3 = new Pairer((SeekBar) findViewById(R.id.sb3), (TextView) findViewById(R.id.tv3), (Spinner) findViewById(R.id.sp3), (LinearLayout) findViewById(R.id.ll3), (Button) findViewById(R.id.button3));
-        test4 = new Pairer((SeekBar) findViewById(R.id.sb4), (TextView) findViewById(R.id.tv4), (Spinner) findViewById(R.id.sp4), (LinearLayout) findViewById(R.id.ll4), (Button) findViewById(R.id.button4));
-        test5 = new Pairer((SeekBar) findViewById(R.id.sb5), (TextView) findViewById(R.id.tv5), (Spinner) findViewById(R.id.sp5), (LinearLayout) findViewById(R.id.ll5), (Button) findViewById(R.id.button5));
+        test1 = new Pairer(1, (SeekBar) findViewById(R.id.sb1), (TextView) findViewById(R.id.tv1), (Spinner) findViewById(R.id.sp1), (LinearLayout) findViewById(R.id.ll1), (Button) findViewById(R.id.button1));
+        test2 = new Pairer(2, (SeekBar) findViewById(R.id.sb2), (TextView) findViewById(R.id.tv2), (Spinner) findViewById(R.id.sp2), (LinearLayout) findViewById(R.id.ll2), (Button) findViewById(R.id.button2));
+        test3 = new Pairer(3, (SeekBar) findViewById(R.id.sb3), (TextView) findViewById(R.id.tv3), (Spinner) findViewById(R.id.sp3), (LinearLayout) findViewById(R.id.ll3), (Button) findViewById(R.id.button3));
+        test4 = new Pairer(4, (SeekBar) findViewById(R.id.sb4), (TextView) findViewById(R.id.tv4), (Spinner) findViewById(R.id.sp4), (LinearLayout) findViewById(R.id.ll4), (Button) findViewById(R.id.button4));
+        test5 = new Pairer(5, (SeekBar) findViewById(R.id.sb5), (TextView) findViewById(R.id.tv5), (Spinner) findViewById(R.id.sp5), (LinearLayout) findViewById(R.id.ll5), (Button) findViewById(R.id.button5));
 
         test1.setColor(253, 245, 230);
         test2.setColor(234, 234, 234);
@@ -68,7 +68,7 @@ public class MainActivity extends ActionBarActivity implements Serializable {
     public boolean validateIndicators(Pairer p) {
         int counter = 0;
         for (int i = 0; i < 5; i++) {
-            if (p.getScenario().equals(pairerArray[i].getScenario())) {
+            if (p.getScenario().equals(pairerArray[i].getScenario()) && pairerArray[i].isEnabled()) {
                 counter++;
             }
             if (counter > 1) {
@@ -116,7 +116,7 @@ public class MainActivity extends ActionBarActivity implements Serializable {
         HashMap<String, Integer> indicators = new HashMap<String, Integer>();
 
         for (int i = 0; i < 5; i++) {
-            if (pairerArray[i].isVisible()) {
+            if (pairerArray[i].isEnabled()) {
                 if (validateIndicators(pairerArray[i])) {
                     indicators.put(getMetaCode(pairerArray[i].getScenario()), pairerArray[i].getImportance() + 1);
                 } else {
@@ -133,6 +133,7 @@ public class MainActivity extends ActionBarActivity implements Serializable {
                 }
             }
         }
+
         ParcelableMap parcelableIndicators = new ParcelableMap(indicators);
 
         Intent intent = new Intent(MainActivity.this, GraphActivity.class);

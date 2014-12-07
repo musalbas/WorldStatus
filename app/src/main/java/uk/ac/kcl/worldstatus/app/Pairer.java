@@ -19,13 +19,16 @@ public class Pairer extends Activity implements OnSeekBarChangeListener {
     private TextView percentage;
     private LinearLayout layout;
     private Button button;
+    private int index;
 
-    public Pairer(SeekBar seekBar, TextView textView, Spinner spinn, LinearLayout linLay, Button b) {
+    public Pairer(int i, SeekBar seekBar, TextView textView, Spinner spinn, LinearLayout linLay, Button b) {
         this.seekbar = seekBar;
         this.percentage = textView;
         this.spinner = spinn;
         this.layout = linLay;
         this.button = b;
+        this.index = i;
+        spinner.setSelection(index - 1);
 
         seekbar.setOnSeekBarChangeListener(this);
 
@@ -36,7 +39,7 @@ public class Pairer extends Activity implements OnSeekBarChangeListener {
             @Override
             public void onClick(View arg0) {
 
-                if (isVisible()) {
+                if (isEnabled()) {
                     layout.setAlpha(0.3f);
                     seekbar.setEnabled(false);
                     spinner.setEnabled(false);
@@ -58,7 +61,7 @@ public class Pairer extends Activity implements OnSeekBarChangeListener {
         return button;
     }
 
-    public boolean isVisible() {
+    public boolean isEnabled() {
         if (layout.getAlpha() == 1.0f) {
             return true;
         } else {

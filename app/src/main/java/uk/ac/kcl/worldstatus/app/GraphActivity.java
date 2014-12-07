@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import org.achartengine.GraphicalView;
 import uk.ac.kcl.worldstatus.app.backend.LegacyDataGrabber;
 
@@ -19,7 +20,7 @@ public class GraphActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_graph); //set to loading layout
+        setContentView(R.layout.loading_layout); //set to loading layout
 
         Bundle extras = getIntent().getExtras();
         ParcelableMap pMap = extras.getParcelable("indicators");
@@ -57,15 +58,19 @@ public class GraphActivity extends Activity {
     public class GrabDataGraph extends GrabData {
         @Override
         public void onPostExecute(GraphData graphData) {
-            LegacyDataGrabber data = graphData.getData();
-            String countryName = graphData.getCountryName();
-            int year = graphData.getYear();
-            HashMap<String, Float> indicatorDataMap = graphData.getIndicatorDataMap();
-
-            BarChart line = new BarChart(graphData);
-            GraphicalView lineView = line.getView(GraphActivity.this);
-            FrameLayout frameLayout = (FrameLayout) findViewById(R.id.chart);
-            frameLayout.addView(lineView);
+            if (graphData == null) {
+                //TODO call error layout
+            } else {
+                BarChart line = new BarChart(graphData);
+                GraphicalView graphView = line.getView(GraphActivity.this);
+                setContentView(R.layout.activity_graph);
+                TextView countryLabel = (TextView) findViewById(R.id.countryLabel);
+                countryLabel.setText("Best match: " + graphData.getCountryName());
+                TextView yearLabel = (TextView) findViewById(R.id.yearLabel);
+                yearLabel.setText("Showing data for: " + graphData.getYear());
+                FrameLayout frameLayout = (FrameLayout) findViewById(R.id.chart);
+                frameLayout.addView(graphView);
+            }
         }
     }
 }
