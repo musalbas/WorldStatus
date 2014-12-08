@@ -21,90 +21,91 @@ import java.util.Map.Entry;
 public class WorldBankData {
 
     /**
-     * Keeps track of score for countries.
-     */
-    public static ArrayList<CountryValue> MasterScoreKeeper = new ArrayList<CountryValue>();
-
-    /**
      * @param map: key = code for data and value is if that is a l/m/h priority.
      * @return Returns an ArrayList of strings with all the countries in order of awesomeness.
      */
     public static LegacyDataGrabber findCountry(HashMap<String, Integer> map) throws ParserConfigurationException, SAXException, IOException {
-        ArrayList<String> Ids = new ArrayList<String>();
-        String[] indicators = new String[map.size()];
-        int indexIndicators = 0;
-
-        for (Entry<String, Integer> entry : map.entrySet()) {
-            indicators[indexIndicators] = entry.getKey(); // saving for later
-            indexIndicators++;
-            Ids.add(entry.getKey());
-        }
-
-        HashMap<String, HashMap<String, Float>> mps = new HashMap<String, HashMap<String, Float>>();
-
-        for (String id : Ids) {
-            ArrayList<CountryValue> temp = new ArrayList<CountryValue>();
-            HashMap<String, Float> mp = null;
-            Log.v("Downloading data", id);
-            mp = getIndicatorDataByYear(id, 2012);
-            mps.put(id, mp);
-
-            for (Map.Entry<String, Float> entry : mp.entrySet()) {
-                temp.add(new CountryValue(entry.getKey(), entry.getValue()));
-            }
-
-            Collections.sort(temp, new CustomComparator());
-
-            float score = map.get(id);
-
-            for (CountryValue i : temp) {
-                boolean found = false;
-
-                for (CountryValue cv : MasterScoreKeeper) {
-                    if (cv.getName().equals(i.getName())) // just update the score
-                    {
-                        cv.setScore(score);
-                        found = true;
-                    }
-                }
-
-                if (found == false) {
-                    MasterScoreKeeper.add(i);
-                }
-
-                score /= 1.1;
-            }
-        }
-
-        ArrayList<String> places = new ArrayList<String>();
-
-        Collections.sort(MasterScoreKeeper, new CustomComparatorScore());
-        for (CountryValue cv : MasterScoreKeeper) {
-            places.add(cv.getName());
-        }
+        Integer indicatorNum = map.size();
+        HashMap<String, Integer> countryPoints = new HashMap<String, Integer>();
+        HashMap<String, Integer> countryIndicatorCount = new HashMap<String, Integer>();
 
         ArrayList<ArrayList<Float[]>> legacyData = new ArrayList<ArrayList<Float[]>>();
 
+        HashMap<String, HashMap<String, Float>> datasets = new HashMap<String, HashMap<String, Float>>();
+
+        String[] indicators = new String[map.size()];
+        int indexIndicators = 0;
+        for (Entry<String, Integer> entry : map.entrySet()) {
+            indicators[indexIndicators] = entry.getKey();
+            indexIndicators++;
+        }
+
+        String indicator;
+        Integer percentage = 0;
+        String country;
+        Integer value;
+        Integer score;
+        Float valueFloat;
+        for (Entry<String, Integer> entry : map.entrySet()) {
+            indicator = entry.getKey();
+            switch (entry.getValue()) {
+                case 1:
+                    percentage = 0;
+                    break;
+                case 2:
+                    percentage = 50;
+                    break;
+                case 3:
+                    percentage = 100;
+                    break;
+            }
+
+            Log.v("Downloading data", indicator);
+            HashMap<String, Float> indicatorData = getIndicatorDataByYear(indicator, 2012);
+            datasets.put(indicator, indicatorData);
+
+            for (Entry<String, Float> datapoint : indicatorData.entrySet()) {
+                country = datapoint.getKey();
+                valueFloat = datapoint.getValue();
+                value = Math.round(valueFloat);
+
+                if (!countryPoints.containsKey(country)) {
+                    countryPoints.put(country, 0);
+                    countryIndicatorCount.put(country, 0);
+                }
+
+                score = 0 - Math.abs(percentage - value);
+                countryPoints.put(country, countryPoints.get(country) + score);
+                countryIndicatorCount.put(country, countryIndicatorCount.get(country) + 1);
+            }
+        }
+
+        for (Entry<String, Integer> entry : countryIndicatorCount.entrySet()) {
+            if (entry.getValue() != indicatorNum) {
+                countryPoints.remove(entry.getKey());
+            }
+        }
+
+        ArrayList<CountryValue> countryValues = new ArrayList<CountryValue>();
+        for (Entry<String, Integer> countryPoint : countryPoints.entrySet()) {
+            countryValues.add(new CountryValue(countryPoint.getKey(), countryPoint.getValue()));
+        }
+
+        Collections.sort(countryValues, new CustomComparator());
+
         for (Entry<String, Integer> entry : map.entrySet()) {
             ArrayList<Float[]> tempFloats = new ArrayList<Float[]>();
-
-            for (int k = 2012; k < 2013; ++k) {
-                HashMap<String, Float> data = null;
-                //data = getIndicatorDataByYear(entry.getKey(), k);
-                data = mps.get(entry.getKey());
-
-                for (Entry<String, Float> dataEntry : data.entrySet()) {
-                    String name = dataEntry.getKey();
-                    if (name.equals(MasterScoreKeeper.get(0).getName())) {
-                        tempFloats.add(new Float[]{(float) k, data.get(name)});
-                    }
+            for (Entry<String, Float> dataEntry : datasets.get(entry.getKey()).entrySet()) {
+                String name = dataEntry.getKey();
+                if (name.equals(countryValues.get(0).getName())) {
+                    tempFloats.add(new Float[]{(float) 2012, datasets.get(entry.getKey()).get(name)});
                 }
             }
 
             legacyData.add(tempFloats);
         }
 
-        return new LegacyDataGrabber(legacyData, MasterScoreKeeper.get(0).getName(), indicators);
+        return new LegacyDataGrabber(legacyData, countryValues.get(0).getName(), indicators);
     }
 
     /**
