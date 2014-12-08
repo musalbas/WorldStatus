@@ -131,6 +131,7 @@ public class MainActivity extends ActionBarActivity implements Serializable {
      * @return true if validation succeeds; false otherwise
      */
     public boolean allowRun() {
+        indicators.clear();
         int counter = 0;
         for (int i = 0; i < 5; i++) {
             if (pairerArray[i].isEnabled()) {
