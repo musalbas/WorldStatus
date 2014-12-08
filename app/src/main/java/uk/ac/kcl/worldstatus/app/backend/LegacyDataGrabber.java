@@ -86,8 +86,6 @@ public class LegacyDataGrabber {
     public String getEnglishName(String x) {
         if (x.equals("SL.UEM.TOTL.ZS")) {
             return "Unemployment";
-        } else if (x.equals("SP.URB.TOTL.ZS")) {
-            return "Urban Population";
         } else if (x.equals("IC.TAX.TOTL.CP.ZS")) {
             return "Tax Rate";
         } else if (x.equals("AG.LND.FRST.ZS")) {

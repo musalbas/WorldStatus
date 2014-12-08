@@ -179,24 +179,21 @@ public class MainActivity extends ActionBarActivity implements Serializable {
                 toReturn = "SL.UEM.TOTL.ZS";
                 break;
             case '2':
-                toReturn = "SP.URB.TOTL.ZS";
-                break;
-            case '3':
                 toReturn = "IC.TAX.TOTL.CP.ZS";
                 break;
-            case '4':
+            case '3':
                 toReturn = "AG.LND.FRST.ZS";
                 break;
-            case '5':
+            case '4':
                 toReturn = "FP.CPI.TOTL.ZG";
                 break;
-            case '6':
+            case '5':
                 toReturn = "SE.SEC.ENRR";
                 break;
-            case '7':
+            case '6':
                 toReturn = "EG.USE.COMM.FO.ZS";
                 break;
-            case '8':
+            case '7':
                 toReturn = "GC.XPN.TOTL.GD.ZS";
                 break;
         }
@@ -242,9 +239,7 @@ public class MainActivity extends ActionBarActivity implements Serializable {
                 instructionsLayout.setVisibility(View.GONE);
                 mainLayout.setVisibility(View.VISIBLE);
                 return false;
-            } /*else {
-                return super.onKeyDown(keyCode, event);
-            }*/
+            }
         }
 
         return super.onKeyDown(keyCode, event);
