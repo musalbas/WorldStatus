@@ -9,7 +9,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/main" android:focusableInTouchMode="true"
-            >
+            android:visibility="gone">
         <ScrollView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -385,11 +385,19 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/instructions" android:visibility="gone">
+            android:layout_height="match_parent" android:id="@+id/instructions" android:visibility="visible">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Welcome to 'Where To Go?'! Our app lets you select a few features that are important to you when looking for a country you'd like to visit. It will then automatically find a country that best matches your preferences and show you the latest data for the features you selected. Start by selecting the relevant feature (indicator) from the dropdown menu and define how important it is to you (Low, Medium, High) by using the slider. Note that you can at most have five indicators active. If you would like to have less than five, you can click on the X button on the right of every indicator which will exclude it from your preferences."
+                android:text="Welcome to 'Where to Go?'
+
+This application works in the following manner:
+
+1) Select the indicators that you would like to search for. Indicators can be removed my pressing the 'X' button in the corner
+2) Select if you would prefer a High - Medium - Low percentage for these indicators using the slider
+3) Touch 'Find Country'
+
+Enjoy!"
                 android:id="@+id/textView"
                 android:gravity="center" android:layout_marginLeft="30dp" android:layout_marginRight="30dp"
                 android:layout_marginTop="50dp"/>
