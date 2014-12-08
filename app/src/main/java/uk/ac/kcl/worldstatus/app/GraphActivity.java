@@ -16,11 +16,14 @@ import java.util.HashMap;
 public class GraphActivity extends Activity {
     private GrabDataGraph grabDataGraph;
     HashMap<String, Integer> indicators;
+    private boolean finishedDownloadingData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_layout); //set to loading layout
+
+        finishedDownloadingData = false;
 
         Bundle extras = getIntent().getExtras();
         ParcelableMap pMap = extras.getParcelable("indicators");
@@ -48,6 +51,7 @@ public class GraphActivity extends Activity {
          */
         @Override
         public void onPostExecute(GraphData graphData) {
+            finishedDownloadingData = true;
             if (graphData == null) {
                 grabDataGraph.cancel(true);
                 setContentView(R.layout.error_layout);
@@ -77,8 +81,10 @@ public class GraphActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            grabDataGraph.doCancel();
-            grabDataGraph.cancel(true);
+            if (!finishedDownloadingData) {
+                grabDataGraph.doCancel();
+                grabDataGraph.cancel(true);
+            }
         }
 
         return super.onKeyDown(keyCode, event);
